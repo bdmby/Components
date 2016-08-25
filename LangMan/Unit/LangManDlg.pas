@@ -23,7 +23,7 @@
 //**             the creation and distribution of any other component,       **
 //**             distributed with or without source code.                    **
 //**                                                                         **
-//**  Licensee:  denis kakop                                                 **
+//**  Licensee:  DZMITRY BRIKHANCHYK                                         **
 //**                                                                         **
 //**  Disclaimer:THIS SOFTWARE AND ANY RELATED DOCUMENTATION IS PROVIDED     **
 //**             "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED      **

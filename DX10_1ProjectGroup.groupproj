@@ -114,6 +114,12 @@
         <Projects Include="EhLib\RADStudioXE10_1\DclEhLibIBXDataDrivers240.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="LangMan\Unit\LangMan_Core.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="LangMan\Unit\LangMan_VCL.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -455,14 +461,32 @@
     <Target Name="DclEhLibIBXDataDrivers240:Make">
         <MSBuild Projects="EhLib\RADStudioXE10_1\DclEhLibIBXDataDrivers240.dproj" Targets="Make"/>
     </Target>
+    <Target Name="LangMan_Core">
+        <MSBuild Projects="LangMan\Unit\LangMan_Core.dproj"/>
+    </Target>
+    <Target Name="LangMan_Core:Clean">
+        <MSBuild Projects="LangMan\Unit\LangMan_Core.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="LangMan_Core:Make">
+        <MSBuild Projects="LangMan\Unit\LangMan_Core.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="LangMan_VCL">
+        <MSBuild Projects="LangMan\Unit\LangMan_VCL.dproj"/>
+    </Target>
+    <Target Name="LangMan_VCL:Clean">
+        <MSBuild Projects="LangMan\Unit\LangMan_VCL.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="LangMan_VCL:Make">
+        <MSBuild Projects="LangMan\Unit\LangMan_VCL.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="RtmRxCtl240;DclRxCtl240;RtmRxDB240;DclRxDB240;fs24;fsDB24;fsADO24;fsIBX24;fsTee24;frx24;frxDB24;frxADO24;frxIBX24;frxDBX24;frxTee24;frxe24;dclfs24;dclfsDB24;dclfsADO24;dclfsIBX24;dclfsTee24;dclfrx24;dclfrxDB24;dclfrxADO24;dclfrxIBX24;dclfrxDBX24;dclfrxTee24;dclfrxe24;SCFRPackage;EhLib240;EhLibADODataDrivers240;EhLibDBXDataDrivers240;EhLibIBXDataDrivers240;DclEhLib240;DclEhLibADODataDrivers240;DclEhLibDBXDataDrivers240;DclEhLibIBXDataDrivers240"/>
+        <CallTarget Targets="RtmRxCtl240;DclRxCtl240;RtmRxDB240;DclRxDB240;fs24;fsDB24;fsADO24;fsIBX24;fsTee24;frx24;frxDB24;frxADO24;frxIBX24;frxDBX24;frxTee24;frxe24;dclfs24;dclfsDB24;dclfsADO24;dclfsIBX24;dclfsTee24;dclfrx24;dclfrxDB24;dclfrxADO24;dclfrxIBX24;dclfrxDBX24;dclfrxTee24;dclfrxe24;SCFRPackage;EhLib240;EhLibADODataDrivers240;EhLibDBXDataDrivers240;EhLibIBXDataDrivers240;DclEhLib240;DclEhLibADODataDrivers240;DclEhLibDBXDataDrivers240;DclEhLibIBXDataDrivers240;LangMan_Core;LangMan_VCL"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="RtmRxCtl240:Clean;DclRxCtl240:Clean;RtmRxDB240:Clean;DclRxDB240:Clean;fs24:Clean;fsDB24:Clean;fsADO24:Clean;fsIBX24:Clean;fsTee24:Clean;frx24:Clean;frxDB24:Clean;frxADO24:Clean;frxIBX24:Clean;frxDBX24:Clean;frxTee24:Clean;frxe24:Clean;dclfs24:Clean;dclfsDB24:Clean;dclfsADO24:Clean;dclfsIBX24:Clean;dclfsTee24:Clean;dclfrx24:Clean;dclfrxDB24:Clean;dclfrxADO24:Clean;dclfrxIBX24:Clean;dclfrxDBX24:Clean;dclfrxTee24:Clean;dclfrxe24:Clean;SCFRPackage:Clean;EhLib240:Clean;EhLibADODataDrivers240:Clean;EhLibDBXDataDrivers240:Clean;EhLibIBXDataDrivers240:Clean;DclEhLib240:Clean;DclEhLibADODataDrivers240:Clean;DclEhLibDBXDataDrivers240:Clean;DclEhLibIBXDataDrivers240:Clean"/>
+        <CallTarget Targets="RtmRxCtl240:Clean;DclRxCtl240:Clean;RtmRxDB240:Clean;DclRxDB240:Clean;fs24:Clean;fsDB24:Clean;fsADO24:Clean;fsIBX24:Clean;fsTee24:Clean;frx24:Clean;frxDB24:Clean;frxADO24:Clean;frxIBX24:Clean;frxDBX24:Clean;frxTee24:Clean;frxe24:Clean;dclfs24:Clean;dclfsDB24:Clean;dclfsADO24:Clean;dclfsIBX24:Clean;dclfsTee24:Clean;dclfrx24:Clean;dclfrxDB24:Clean;dclfrxADO24:Clean;dclfrxIBX24:Clean;dclfrxDBX24:Clean;dclfrxTee24:Clean;dclfrxe24:Clean;SCFRPackage:Clean;EhLib240:Clean;EhLibADODataDrivers240:Clean;EhLibDBXDataDrivers240:Clean;EhLibIBXDataDrivers240:Clean;DclEhLib240:Clean;DclEhLibADODataDrivers240:Clean;DclEhLibDBXDataDrivers240:Clean;DclEhLibIBXDataDrivers240:Clean;LangMan_Core:Clean;LangMan_VCL:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="RtmRxCtl240:Make;DclRxCtl240:Make;RtmRxDB240:Make;DclRxDB240:Make;fs24:Make;fsDB24:Make;fsADO24:Make;fsIBX24:Make;fsTee24:Make;frx24:Make;frxDB24:Make;frxADO24:Make;frxIBX24:Make;frxDBX24:Make;frxTee24:Make;frxe24:Make;dclfs24:Make;dclfsDB24:Make;dclfsADO24:Make;dclfsIBX24:Make;dclfsTee24:Make;dclfrx24:Make;dclfrxDB24:Make;dclfrxADO24:Make;dclfrxIBX24:Make;dclfrxDBX24:Make;dclfrxTee24:Make;dclfrxe24:Make;SCFRPackage:Make;EhLib240:Make;EhLibADODataDrivers240:Make;EhLibDBXDataDrivers240:Make;EhLibIBXDataDrivers240:Make;DclEhLib240:Make;DclEhLibADODataDrivers240:Make;DclEhLibDBXDataDrivers240:Make;DclEhLibIBXDataDrivers240:Make"/>
+        <CallTarget Targets="RtmRxCtl240:Make;DclRxCtl240:Make;RtmRxDB240:Make;DclRxDB240:Make;fs24:Make;fsDB24:Make;fsADO24:Make;fsIBX24:Make;fsTee24:Make;frx24:Make;frxDB24:Make;frxADO24:Make;frxIBX24:Make;frxDBX24:Make;frxTee24:Make;frxe24:Make;dclfs24:Make;dclfsDB24:Make;dclfsADO24:Make;dclfsIBX24:Make;dclfsTee24:Make;dclfrx24:Make;dclfrxDB24:Make;dclfrxADO24:Make;dclfrxIBX24:Make;dclfrxDBX24:Make;dclfrxTee24:Make;dclfrxe24:Make;SCFRPackage:Make;EhLib240:Make;EhLibADODataDrivers240:Make;EhLibDBXDataDrivers240:Make;EhLibIBXDataDrivers240:Make;DclEhLib240:Make;DclEhLibADODataDrivers240:Make;DclEhLibDBXDataDrivers240:Make;DclEhLibIBXDataDrivers240:Make;LangMan_Core:Make;LangMan_VCL:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

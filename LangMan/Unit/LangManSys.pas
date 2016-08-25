@@ -23,7 +23,7 @@
 //**             the creation and distribution of any other component,       **
 //**             distributed with or without source code.                    **
 //**                                                                         **
-//**  Licensee:  denis kakop                                                 **
+//**  Licensee:  DZMITRY BRIKHANCHYK                                         **
 //**                                                                         **
 //**  Disclaimer:THIS SOFTWARE AND ANY RELATED DOCUMENTATION IS PROVIDED     **
 //**             "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED      **
@@ -146,7 +146,7 @@ const
   // Descent item flags and masks
   FIND_ALL_DESCENTS = 512;
   GLOBAL_DESCENT_FLAG = 256;
-  DESCENT_UNIFY = 402;
+  DESCENT_UNIFY = 403;
   DESCENT_MASK = 255;
   DESIGN_DESCENT = 255;
   MAX_DESCENT = 254;
