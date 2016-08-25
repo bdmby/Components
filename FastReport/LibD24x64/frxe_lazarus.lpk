@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <Package Version="4">
+    <PathDelim Value="\"/>
+    <Name Value="frxe_lazarus"/>
+    <Type Value="RunAndDesignTime"/>
+    <CompilerOptions>
+      <Version Value="11"/>
+      <PathDelim Value="\"/>
+      <SearchPaths>
+        <IncludeFiles Value=".."/>
+        <OtherUnitFiles Value="."/>
+        <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
+      </SearchPaths>
+      <Parsing>
+        <SyntaxOptions>
+          <SyntaxMode Value="Delphi"/>
+        </SyntaxOptions>
+      </Parsing>
+    </CompilerOptions>
+    <Files Count="10">
+      <Item1>
+        <Filename Value="frxExportImage.pas"/>
+        <UnitName Value="frxExportImage"/>
+      </Item1>
+      <Item2>
+        <Filename Value="frxeReg.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="frxeReg"/>
+      </Item2>
+      <Item3>
+        <Filename Value="frxExportMatrix.pas"/>
+        <UnitName Value="frxExportMatrix"/>
+      </Item3>
+      <Item4>
+        <Filename Value="frxExportHTML.pas"/>
+        <UnitName Value="frxExportHTML"/>
+      </Item4>
+      <Item5>
+        <Filename Value="frxExportHTMLDiv.pas"/>
+        <UnitName Value="frxExportHTMLDiv"/>
+      </Item5>
+      <Item6>
+        <Filename Value="frxExportHelpers.pas"/>
+        <UnitName Value="frxExportHelpers"/>
+      </Item6>
+      <Item7>
+        <Filename Value="frxCrypto.pas"/>
+        <UnitName Value="frxCrypto"/>
+      </Item7>
+      <Item8>
+        <Filename Value="frxStorage.pas"/>
+        <UnitName Value="frxStorage"/>
+      </Item8>
+      <Item9>
+        <Filename Value="frxExportODF.pas"/>
+        <UnitName Value="frxExportODF"/>
+      </Item9>
+      <Item10>
+        <Filename Value="frxExportPDFLaz.pas"/>
+        <UnitName Value="frxExportPDFLaz"/>
+      </Item10>
+    </Files>
+    <RequiredPkgs Count="2">
+      <Item1>
+        <PackageName Value="fr5_lazarus"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="FCL"/>
+      </Item2>
+    </RequiredPkgs>
+    <UsageOptions>
+      <UnitPath Value="$(PkgOutDir)"/>
+    </UsageOptions>
+    <PublishOptions>
+      <Version Value="2"/>
+    </PublishOptions>
+  </Package>
+</CONFIG>

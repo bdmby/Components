@@ -1,0 +1,74 @@
+{*******************************************************}
+{                                                       }
+{                        EhLib v8.2                     }
+{                                                       }
+{                      SpinGridsEh                      }
+{                      Build 8.2.0001                    }
+{                                                       }
+{   Copyright (c) 2014-2015 by Dmitry V. Bolshakov      }
+{                                                       }
+{*******************************************************}
+
+{$I EhLib.Inc}
+
+unit PlannerItemDialog;
+
+interface
+
+uses
+{$IFDEF CIL}
+  EhLibVCLNET,
+  WinUtils,
+{$ELSE}
+  {$IFDEF FPC}
+  EhLibLCL, LMessages, LCLType, Win32Extra, MaskEdit,
+  {$ELSE}
+  EhLibVCL, DBConsts, RTLConsts, Mask,
+  {$ENDIF}
+{$ENDIF}
+  Windows, Messages, SysUtils, Variants, Classes, Graphics,
+  Controls, Forms, Dialogs, StdCtrls,
+  DBCtrlsEh, PlannersEh, PlannerDataEh,
+  DateUtils,
+  ComCtrls, ExtCtrls;
+
+type
+  TPlannerItemForm = class(TForm)
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Bevel1: TBevel;
+    Bevel2: TBevel;
+    AllDayCheck: TCheckBox;
+    OKButton: TButton;
+    CancelButton: TButton;
+    eTitle: TDBEditEh;
+    cbStartTimeEdit: TDBComboBoxEh;
+    cbFinishTimeEdit: TDBComboBoxEh;
+    eBody: TDBMemoEh;
+    Bevel3: TBevel;
+    cbxRecource: TDBComboBoxEh;
+    Bevel4: TBevel;
+    StartDateEdit: TDBDateTimeEditEh;
+    EndDateEdit: TDBDateTimeEditEh;
+    procedure cbStartTimeEditEnter(Sender: TObject);
+    procedure cbStartTimeEditChange(Sender: TObject);
+    procedure StartDateEditEnter(Sender: TObject);
+    procedure StartDateEditChange(Sender: TObject);
+  private
+    { Private declarations }
+    FDeltaTime: TDateTime;
+    FDeltaDate: TDateTime;
+  public
+    procedure InitForm(Item: TPlannerDataItemEh);
+    function FormStarDate: TDateTime;
+    function FormEndDate: TDateTime;
+  end;
+
+var
+  PlannerItemForm: TPlannerItemForm;
+
+function EditPlanItem(Planner: TPlannerControlEh; Item: TPlannerDataItemEh): Boolean;
+procedure EditNewItem(Planner: TPlannerControlEh);
+
+implementation

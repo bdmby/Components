@@ -1,0 +1,441 @@
+object frxOptionsEditor: TfrxOptionsEditor
+  Left = 383
+  Height = 536
+  Top = 101
+  Width = 371
+  AutoSize = True
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsDialog
+  Caption = 'Designer Options'
+  ClientHeight = 536
+  ClientWidth = 371
+  Color = clBtnFace
+  Font.Color = clWindowText
+  Font.Height = -11
+  KeyPreview = True
+  OnCreate = FormCreate
+  OnHide = FormHide
+  OnKeyDown = FormKeyDown
+  OnShow = FormShow
+  Position = poScreenCenter
+  LCLVersion = '1.4.4.0'
+  object OkB: TButton
+    Left = 208
+    Height = 25
+    Top = 508
+    Width = 75
+    Caption = 'OK'
+    Default = True
+    ModalResult = 1
+    TabOrder = 0
+  end
+  object CancelB: TButton
+    Left = 288
+    Height = 25
+    Top = 508
+    Width = 75
+    Cancel = True
+    Caption = 'Cancel'
+    ModalResult = 2
+    TabOrder = 1
+  end
+  object RestoreDefaultsB: TButton
+    Left = 8
+    Height = 25
+    Top = 508
+    Width = 137
+    Caption = 'Restore defaults'
+    OnClick = RestoreDefaultsBClick
+    TabOrder = 2
+  end
+  object Label1: TGroupBox
+    Left = 3
+    Height = 137
+    Top = 0
+    Width = 364
+    Caption = 'Grid'
+    ClientHeight = 119
+    ClientWidth = 356
+    TabOrder = 3
+    object Label2: TLabel
+      Left = 8
+      Height = 14
+      Top = 0
+      Width = 26
+      Caption = 'Type'
+      ParentColor = False
+    end
+    object Label3: TLabel
+      Left = 128
+      Height = 14
+      Top = 0
+      Width = 21
+      Caption = 'Size'
+      ParentColor = False
+    end
+    object Label4: TLabel
+      Left = 26
+      Height = 14
+      Top = 94
+      Width = 61
+      Caption = 'Dialog form'
+      ParentColor = False
+    end
+    object Label13: TLabel
+      Left = 171
+      Height = 14
+      Top = 20
+      Width = 16
+      Caption = 'cm'
+      ParentColor = False
+    end
+    object Label14: TLabel
+      Left = 168
+      Height = 14
+      Top = 48
+      Width = 11
+      Caption = 'in'
+      ParentColor = False
+    end
+    object Label15: TLabel
+      Left = 168
+      Height = 14
+      Top = 72
+      Width = 13
+      Caption = 'pt'
+      ParentColor = False
+    end
+    object Label16: TLabel
+      Left = 168
+      Height = 14
+      Top = 96
+      Width = 13
+      Caption = 'pt'
+      ParentColor = False
+    end
+    object CMRB: TRadioButton
+      Left = 8
+      Height = 21
+      Top = 20
+      Width = 93
+      Caption = 'Centimeters'
+      TabOrder = 0
+    end
+    object InchesRB: TRadioButton
+      Left = 8
+      Height = 21
+      Top = 44
+      Width = 63
+      Caption = 'Inches'
+      TabOrder = 1
+    end
+    object PixelsRB: TRadioButton
+      Left = 8
+      Height = 21
+      Top = 68
+      Width = 61
+      Caption = 'Pixels'
+      TabOrder = 2
+    end
+    object CME: TEdit
+      Left = 128
+      Height = 21
+      Top = 18
+      Width = 37
+      AutoSize = False
+      TabOrder = 3
+    end
+    object InchesE: TEdit
+      Left = 128
+      Height = 21
+      Top = 42
+      Width = 37
+      AutoSize = False
+      TabOrder = 4
+    end
+    object PixelsE: TEdit
+      Left = 128
+      Height = 21
+      Top = 66
+      Width = 37
+      AutoSize = False
+      TabOrder = 5
+    end
+    object DialogFormE: TEdit
+      Left = 128
+      Height = 21
+      Top = 90
+      Width = 37
+      AutoSize = False
+      TabOrder = 6
+    end
+    object ShowGridCB: TCheckBox
+      Left = 196
+      Height = 21
+      Top = 20
+      Width = 81
+      Caption = 'Show grid'
+      TabOrder = 7
+    end
+    object AlignGridCB: TCheckBox
+      Left = 196
+      Height = 21
+      Top = 40
+      Width = 93
+      Caption = 'Align to grid'
+      TabOrder = 8
+    end
+  end
+  object Label6: TGroupBox
+    Left = 3
+    Height = 93
+    Top = 144
+    Width = 363
+    Caption = 'Fonts'
+    ClientHeight = 75
+    ClientWidth = 355
+    TabOrder = 4
+    object Label7: TLabel
+      Left = 7
+      Height = 14
+      Top = 6
+      Width = 69
+      Caption = 'Code window'
+      ParentColor = False
+    end
+    object Label8: TLabel
+      Left = 7
+      Height = 14
+      Top = 33
+      Width = 67
+      Caption = 'Memo editor'
+      ParentColor = False
+    end
+    object Label9: TLabel
+      Left = 259
+      Height = 14
+      Top = 6
+      Width = 21
+      Alignment = taRightJustify
+      Caption = 'Size'
+      ParentColor = False
+    end
+    object Label10: TLabel
+      Left = 259
+      Height = 14
+      Top = 33
+      Width = 21
+      Alignment = taRightJustify
+      Caption = 'Size'
+      ParentColor = False
+    end
+    object CodeWindowFontCB: TComboBox
+      Left = 111
+      Height = 24
+      Top = 0
+      Width = 121
+      DropDownCount = 12
+      ItemHeight = 23
+      TabOrder = 0
+    end
+    object CodeWindowSizeCB: TComboBox
+      Left = 305
+      Height = 24
+      Top = 0
+      Width = 44
+      ItemHeight = 16
+      Items.Strings = (
+        '8'
+        '9'
+        '10'
+        '11'
+        '12'
+        '14'
+      )
+      TabOrder = 1
+    end
+    object MemoEditorFontCB: TComboBox
+      Left = 111
+      Height = 24
+      Top = 28
+      Width = 121
+      DropDownCount = 12
+      ItemHeight = 23
+      TabOrder = 2
+    end
+    object MemoEditorSizeCB: TComboBox
+      Left = 305
+      Height = 24
+      Top = 28
+      Width = 44
+      ItemHeight = 16
+      Items.Strings = (
+        '8'
+        '9'
+        '10'
+        '11'
+        '12'
+        '14'
+      )
+      TabOrder = 3
+    end
+    object ObjectFontCB: TCheckBox
+      Left = 111
+      Height = 21
+      Top = 50
+      Width = 156
+      Caption = 'Use objects font settings'
+      TabOrder = 4
+    end
+  end
+  object Label11: TGroupBox
+    Left = 3
+    Height = 97
+    Top = 240
+    Width = 364
+    Caption = 'Colors'
+    ClientHeight = 79
+    ClientWidth = 356
+    TabOrder = 5
+    object WorkspacePB: TPaintBox
+      Left = 168
+      Height = 21
+      Top = 0
+      Width = 161
+      OnPaint = WorkspacePBPaint
+    end
+    object ToolPB: TPaintBox
+      Left = 168
+      Height = 21
+      Top = 24
+      Width = 161
+      OnPaint = ToolPBPaint
+    end
+    object WorkspaceB: TButton
+      Left = 8
+      Height = 21
+      Top = 0
+      Width = 145
+      Caption = 'Workspace'
+      OnClick = WorkspaceBClick
+      TabOrder = 0
+    end
+    object ToolB: TButton
+      Left = 8
+      Height = 21
+      Top = 24
+      Width = 145
+      Caption = 'Tool windows'
+      OnClick = ToolBClick
+      TabOrder = 1
+    end
+    object LCDCB: TCheckBox
+      Left = 8
+      Height = 21
+      Top = 52
+      Width = 103
+      Caption = 'LCD grid color'
+      TabOrder = 2
+    end
+  end
+  object Label5: TGroupBox
+    Left = 3
+    Height = 155
+    Top = 340
+    Width = 364
+    Caption = 'Other'
+    ClientHeight = 137
+    ClientWidth = 356
+    TabOrder = 6
+    object Label12: TLabel
+      Left = 8
+      Height = 14
+      Top = 108
+      Width = 103
+      Caption = 'Gap between bands:'
+      ParentColor = False
+    end
+    object Label17: TLabel
+      Left = 212
+      Height = 14
+      Top = 108
+      Width = 13
+      Caption = 'pt'
+      ParentColor = False
+    end
+    object EditAfterInsCB: TCheckBox
+      Left = 8
+      Height = 21
+      Top = 0
+      Width = 151
+      Caption = 'Show editor after insert'
+      TabOrder = 0
+    end
+    object FreeBandsCB: TCheckBox
+      Left = 8
+      Height = 21
+      Top = 60
+      Width = 143
+      Caption = 'Free bands placement'
+      TabOrder = 3
+    end
+    object GapE: TEdit
+      Left = 172
+      Height = 24
+      Top = 104
+      Width = 37
+      TabOrder = 5
+    end
+    object BandsCaptionsCB: TCheckBox
+      Left = 8
+      Height = 21
+      Top = 20
+      Width = 136
+      Caption = 'Show bands captions'
+      TabOrder = 1
+    end
+    object DropFieldsCB: TCheckBox
+      Left = 8
+      Height = 21
+      Top = 40
+      Width = 165
+      Caption = 'Show drop-down fields list'
+      TabOrder = 2
+    end
+    object StartupCB: TCheckBox
+      Left = 8
+      Height = 21
+      Top = 80
+      Width = 133
+      Caption = 'Show startup screen'
+      TabOrder = 4
+    end
+  end
+  object ColorDialog: TColorDialog
+    Color = clBlack
+    CustomColors.Strings = (
+      'ColorA=000000'
+      'ColorB=000080'
+      'ColorC=008000'
+      'ColorD=008080'
+      'ColorE=800000'
+      'ColorF=800080'
+      'ColorG=808000'
+      'ColorH=808080'
+      'ColorI=C0C0C0'
+      'ColorJ=0000FF'
+      'ColorK=00FF00'
+      'ColorL=00FFFF'
+      'ColorM=FF0000'
+      'ColorN=FF00FF'
+      'ColorO=FFFF00'
+      'ColorP=FFFFFF'
+      'ColorQ=C0DCC0'
+      'ColorR=F0CAA6'
+      'ColorS=F0FBFF'
+      'ColorT=A4A0A0'
+    )
+    left = 168
+    top = 276
+  end
+end

@@ -1,0 +1,71 @@
+{*******************************************************}
+{                                                       }
+{                      EhLib v8.2                       }
+{     Export DBGridEh into XML Spreadsheet Format       }
+{                     Build 8.2.05                      }
+{                                                       }
+{      Copyright (c) 2014-15 by Dmitry V. Bolshakov     }
+{                                                       }
+{*******************************************************}
+
+unit DBGridEhXMLSpreadsheetExp;
+
+{$I EhLib.Inc}
+
+interface
+
+uses
+  Windows, SysUtils, Classes, Graphics, Dialogs, GridsEh, Controls,
+{$IFDEF EH_LIB_6} Variants, {$ENDIF}
+{$IFDEF EH_LIB_16} System.Zip, {$ENDIF}
+{$IFDEF FPC}
+  XMLRead, DOM, EhLibXmlConsts,
+{$ELSE}
+  xmldom, XMLIntf, XMLDoc, EhLibXmlConsts,
+{$ENDIF}
+{$IFDEF EH_LIB_17} System.UITypes, System.Contnrs, {$ENDIF}
+{$IFDEF CIL}
+  EhLibVCLNET,
+  System.Runtime.InteropServices, System.Reflection,
+{$ELSE}
+  {$IFDEF FPC}
+    EhLibLCL, LCLType, Win32Extra, DBGridsEh,
+  {$ELSE}
+    EhLibVCL, Messages, SqlTimSt, DBGridEh,
+  {$ENDIF}
+{$ENDIF}
+  DBGridEhImpExp, ToolCtrlsEh,
+  DBAxisGridsEh, 
+  Db, ComObj, StdCtrls, XMLSpreadsheetFormatEh;
+
+type
+
+{ TDBGridEhExportAsXMLSpreadsheet }
+
+  TDBGridEhExportAsXMLSpreadsheet = class(TDBGridEhExport)
+  private
+    FOptions: TExportAsXMLSpShOptionsEh;
+    FSeparator: Char;
+    XMLSpreadsheet: TXMLSpreadsheetExportEh;
+  protected
+    procedure WritePrefix; override;
+    procedure WriteSuffix; override;
+    procedure WriteTitle(ColumnsList: TColumnsEhList); override;
+    procedure WriteDataCell(Column: TColumnEh; FColCellParamsEh: TColCellParamsEh); override;
+    procedure WriteFooter(ColumnsList: TColumnsEhList; FooterNo: Integer); override;
+    procedure WriteFooterCell(DataCol, Row: Integer; Column: TColumnEh; AFont: TFont; Background: TColor; Alignment: TAlignment; const Text: String); override;
+    procedure WriteRecord(ColumnsList: TColumnsEhList); override;
+  public
+    procedure ExportToStream(AStream: TStream; IsExportAll: Boolean); override;
+
+    property Options: TExportAsXMLSpShOptionsEh read FOptions write FOptions;
+  end;
+
+{$IFDEF FPC}
+{$ELSE}
+  procedure ExportDBGridEhToXMLSpreadsheet(DBGridEh: TCustomDBGridEh;
+    const FileName: String;
+    Options: TExportAsXMLSpShOptionsEh; IsSaveAll: Boolean = True);
+{$ENDIF}
+
+implementation

@@ -1,0 +1,300 @@
+object frxPreviewForm: TfrxPreviewForm
+  Left = 219
+  Height = 584
+  Top = 328
+  Width = 803
+  Caption = 'Preview'
+  ClientHeight = 584
+  ClientWidth = 803
+  Color = clBtnFace
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  KeyPreview = True
+  OnClose = FormClose
+  OnCloseQuery = FormCloseQuery
+  OnCreate = FormCreate
+  OnKeyDown = FormKeyDown
+  OnKeyPress = FormKeyPress
+  OnMouseWheel = FormMouseWheel
+  OnResize = FormResize
+  PopupMenu = RightMenu
+  Position = poScreenCenter
+  ShowHint = True
+  LCLVersion = '1.4.4.0'
+  object ToolBar: TToolBar
+    Left = 0
+    Height = 23
+    Top = 0
+    Width = 803
+    AutoSize = True
+    BorderWidth = 2
+    ButtonHeight = 23
+    EdgeBorders = []
+    TabOrder = 0
+    Wrapable = False
+    object PrintB: TToolButton
+      Left = 12
+      Top = 0
+      Caption = 'Print'
+      ImageIndex = 2
+      OnClick = PrintBClick
+    end
+    object OpenB: TToolButton
+      Left = 35
+      Top = 0
+      Caption = 'Open'
+      ImageIndex = 0
+      OnClick = OpenBClick
+    end
+    object SaveB: TToolButton
+      Left = 58
+      Top = 0
+      Caption = 'Save'
+      DropdownMenu = ExportPopup
+      ImageIndex = 1
+    end
+    object PdfB: TToolButton
+      Left = 81
+      Top = 0
+      Caption = 'PdfB'
+      ImageIndex = 24
+      OnClick = PdfBClick
+      Visible = False
+    end
+    object EmailB: TToolButton
+      Left = 104
+      Top = 0
+      Caption = 'EmailB'
+      ImageIndex = 23
+      OnClick = EmailBClick
+      Visible = False
+    end
+    object FindB: TToolButton
+      Left = 127
+      Top = 0
+      Caption = 'Find'
+      ImageIndex = 4
+      OnClick = FindBClick
+    end
+    object Sep1: TToolButton
+      Left = 150
+      Height = 23
+      Top = 0
+      Width = 10
+      ImageIndex = 7
+      Style = tbsSeparator
+    end
+    object ZoomPlusB: TToolButton
+      Left = 160
+      Top = 0
+      Caption = 'Zoom'
+      ImageIndex = 15
+      OnClick = ZoomPlusBClick
+    end
+    object Sep3: TfrxTBPanel
+      Left = 183
+      Height = 23
+      Top = 0
+      Width = 87
+      BevelOuter = bvNone
+      ClientHeight = 23
+      ClientWidth = 87
+      TabOrder = 0
+      object ZoomCB: TfrxComboBox
+        Left = 4
+        Height = 21
+        Top = 0
+        Width = 76
+        ItemHeight = 13
+        OnSelect = ZoomCBClick
+        TabOrder = 0
+        Text = '100%'
+        ListWidth = 0
+      end
+    end
+    object ZoomMinusB: TToolButton
+      Left = 270
+      Top = 0
+      Caption = 'Whole Page'
+      ImageIndex = 16
+      OnClick = ZoomMinusBClick
+    end
+    object FullScreenBtn: TToolButton
+      Left = 293
+      Top = 0
+      Caption = 'F'
+      ImageIndex = 22
+      OnClick = FullScreenBtnClick
+    end
+    object Sep2: TToolButton
+      Left = 316
+      Height = 23
+      Top = 0
+      Width = 10
+      ImageIndex = 6
+      Style = tbsSeparator
+    end
+    object OutlineB: TToolButton
+      Left = 326
+      Top = 0
+      AllowAllUp = True
+      Grouped = True
+      ImageIndex = 12
+      OnClick = OutlineBClick
+      Style = tbsCheck
+    end
+    object ThumbB: TToolButton
+      Left = 349
+      Top = 0
+      AllowAllUp = True
+      Caption = 'ThumbB'
+      Grouped = True
+      ImageIndex = 5
+      OnClick = ThumbBClick
+      Style = tbsCheck
+    end
+    object PageSettingsB: TToolButton
+      Left = 372
+      Top = 0
+      Caption = 'Margins'
+      ImageIndex = 7
+      OnClick = PageSettingsBClick
+    end
+    object DesignerB: TToolButton
+      Left = 395
+      Top = 0
+      Caption = 'Edit'
+      ImageIndex = 21
+      OnClick = DesignerBClick
+      OnMouseUp = DesignerBMouseUp
+    end
+    object Sep5: TToolButton
+      Left = 418
+      Height = 23
+      Top = 0
+      Width = 10
+      ImageIndex = 11
+      Style = tbsSeparator
+    end
+    object FirstB: TToolButton
+      Left = 428
+      Top = 0
+      Caption = 'First'
+      ImageIndex = 8
+      OnClick = FirstBClick
+    end
+    object PriorB: TToolButton
+      Left = 451
+      Top = 0
+      Caption = 'Prior'
+      ImageIndex = 9
+      OnClick = PriorBClick
+    end
+    object Sep4: TfrxTBPanel
+      Left = 474
+      Height = 23
+      Top = 0
+      Width = 108
+      BevelOuter = bvNone
+      ClientHeight = 23
+      ClientWidth = 108
+      TabOrder = 1
+      object OfNL: TLabel
+        Left = 48
+        Height = 13
+        Top = 4
+        Width = 20
+        Caption = 'of N'
+        ParentColor = False
+      end
+      object PageE: TEdit
+        Left = 4
+        Height = 13
+        Top = 4
+        Width = 37
+        BorderStyle = bsNone
+        TabOrder = 0
+        Text = '1'
+      end
+    end
+    object NextB: TToolButton
+      Left = 582
+      Top = 0
+      Caption = 'Next'
+      ImageIndex = 10
+      OnClick = NextBClick
+    end
+    object LastB: TToolButton
+      Left = 605
+      Top = 0
+      Caption = 'Last'
+      ImageIndex = 11
+      OnClick = LastBClick
+    end
+    object frTBPanel1: TfrxTBPanel
+      Left = 1
+      Height = 23
+      Top = 0
+      Width = 11
+      Align = alLeft
+      BevelOuter = bvNone
+      TabOrder = 2
+    end
+    object CancelB: TSpeedButton
+      Left = 628
+      Height = 23
+      Top = 0
+      Width = 68
+      Caption = 'Close'
+      Spacing = 2
+      OnClick = CancelBClick
+    end
+  end
+  object StatusBar: TStatusBar
+    Left = 0
+    Height = 23
+    Top = 561
+    Width = 803
+    Panels = <    
+      item
+        Text = 'Page 1 of 1000'
+        Width = 200
+      end    
+      item
+        Width = 50
+      end    
+      item
+        Width = 50
+      end>
+  end
+  object ExportPopup: TPopupMenu
+    left = 92
+    top = 84
+  end
+  object HiddenMenu: TPopupMenu
+    left = 228
+    top = 96
+    object Showtemplate1: TMenuItem
+      Caption = 'Show template'
+      OnClick = Showtemplate1Click
+    end
+  end
+  object RightMenu: TPopupMenu
+    left = 304
+    top = 92
+    object CollapseMI: TMenuItem
+      Caption = 'Collapse all'
+      ImageIndex = 13
+      OnClick = CollapseAllClick
+    end
+    object ExpandMI: TMenuItem
+      Caption = 'Expand all'
+      ImageIndex = 14
+      OnClick = ExpandAllClick
+    end
+    object N1: TMenuItem
+      Caption = '-'
+    end
+  end
+end

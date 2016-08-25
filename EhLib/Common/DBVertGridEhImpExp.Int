@@ -1,0 +1,61 @@
+{*******************************************************}
+{                                                       }
+{                       EhLib v8.2                      }
+{             DBGridEh import/export routines           }
+{                      Build 8.2.18                     }
+{                                                       }
+{   Copyright (c) 2015-2015 by Dmitry V. Bolshakov      }
+{                                                       }
+{*******************************************************}
+
+unit DBVertGridEhImpExp;
+
+{$I EhLib.Inc}
+
+interface
+
+uses
+  Windows, SysUtils, Classes, Graphics, Dialogs, GridsEh, Controls,
+{$IFDEF EH_LIB_6} Variants, {$ENDIF}
+{$IFDEF EH_LIB_16} System.Zip, {$ENDIF}
+{$IFDEF FPC}
+  XMLRead, DOM, EhLibXmlConsts,
+{$ELSE}
+  xmldom, XMLIntf, XMLDoc, EhLibXmlConsts,
+{$ENDIF}
+
+{$IFDEF EH_LIB_17} System.UITypes, System.Contnrs, {$ENDIF}
+{$IFDEF CIL}
+  EhLibVCLNET,
+  System.Runtime.InteropServices, System.Reflection,
+{$ELSE}
+  {$IFDEF FPC}
+    EhLibLCL, LCLType, Win32Extra,
+  {$ELSE}
+    EhLibVCL, Messages, SqlTimSt,
+  {$ENDIF}
+{$ENDIF}
+  XlsxFormatEh, DBVertGridsEh,
+  Db, Clipbrd, ComObj, StdCtrls;
+
+type
+
+
+  TDBVertGridExportToXlsxEh = class(TXlsxFileWriterEh)
+  private
+    FDBVertGrid: TCustomDBVertGridEh;
+  protected
+    function GetColWidth(ACol: Integer): Integer; override;
+    function InitTableCheckEof: Boolean; override;
+    function GetColCount: Integer; override;
+    function InitRowCheckEof(ARow: Integer): Boolean; override;
+
+    procedure GetCellData(ACol, ARow: Integer; CellData: TXlsxCellDataEh); override;
+  public
+    property DBVertGrid: TCustomDBVertGridEh read FDBVertGrid write FDBVertGrid;
+  end;
+
+  procedure ExportDBVertGridEhToXlsx(DBVertGridEh: TCustomDBVertGridEh;
+    const FileName: String);
+
+implementation

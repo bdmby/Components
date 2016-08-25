@@ -1,0 +1,72 @@
+object frxWatchForm: TfrxWatchForm
+  Left = 364
+  Top = 345
+  Width = 411
+  Height = 158
+  BorderStyle = bsSizeToolWin
+  Caption = 'Watch list'
+  Color = clBtnFace
+  DragKind = dkDock
+  DragMode = dmAutomatic
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  FormStyle = fsStayOnTop
+  KeyPreview = True
+  OldCreateOrder = False
+  Position = poDefault
+  ShowHint = True
+  OnCloseQuery = FormCloseQuery
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnKeyDown = FormKeyDown
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object ToolBar1: TToolBar
+    Left = 0
+    Top = 0
+    Width = 403
+    Height = 30
+    BorderWidth = 2
+    Caption = 'ToolBar1'
+    EdgeBorders = []
+    Flat = True
+    TabOrder = 0
+    object AddB: TToolButton
+      Left = 0
+      Top = 0
+      Hint = 'Add watch'
+      ImageIndex = 97
+      OnClick = AddBClick
+    end
+    object DeleteB: TToolButton
+      Left = 23
+      Top = 0
+      Hint = 'Delete watch'
+      ImageIndex = 98
+      OnClick = DeleteBClick
+    end
+    object EditB: TToolButton
+      Left = 46
+      Top = 0
+      Hint = 'Edit watch'
+      ImageIndex = 68
+      OnClick = EditBClick
+    end
+  end
+  object WatchLB: TCheckListBox
+    Left = 0
+    Top = 30
+    Width = 403
+    Height = 94
+    OnClickCheck = WatchLBClickCheck
+    Align = alClient
+    BorderStyle = bsNone
+    ItemHeight = 13
+    TabOrder = 1
+    OnDblClick = EditBClick
+  end
+end

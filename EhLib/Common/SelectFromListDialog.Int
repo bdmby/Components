@@ -1,0 +1,36 @@
+{*******************************************************}
+{                                                       }
+{                     EhLib v8.2                        }
+{                                                       }
+{             TfSelectFromListDialog form               }
+{                    (Build 8.2.00)                     }
+{                                                       }
+{     Copyright (c) 2004-2012 by Dmitry V. Bolshakov    }
+{                                                       }
+{*******************************************************}
+
+unit SelectFromListDialog;
+
+interface
+
+uses Windows, SysUtils, Classes, Graphics, Forms, Controls, StdCtrls, 
+  Buttons, ExtCtrls;
+
+type
+  TfSelectFromListDialog = class(TForm)
+    OKBtn: TButton;
+    CancelBtn: TButton;
+    Bevel1: TBevel;
+    ListBox1: TListBox;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  fSelectFromListDialog: TfSelectFromListDialog;
+
+function SelectFromList(Items: TStrings): Integer;
+
+implementation

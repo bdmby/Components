@@ -1,0 +1,190 @@
+{*******************************************************}
+{                                                       }
+{                      EhLib v8.2                       }
+{                                                       }
+{           Classes to work with Xlsx Format            }
+{                     Build 8.2.05                      }
+{                                                       }
+{      Copyright (c) 2015-15 by Dmitry V. Bolshakov     }
+{                                                       }
+{*******************************************************}
+
+unit XlsxFormatEh;
+
+{$I EhLib.Inc}
+
+interface
+
+uses
+  Windows, SysUtils, Classes, Graphics, Dialogs, GridsEh, Controls,
+{$IFDEF EH_LIB_6} Variants, {$ENDIF}
+{$IFDEF EH_LIB_16} System.Zip, {$ENDIF}
+{$IFDEF FPC}
+  XMLRead, DOM, EhLibXmlConsts,
+{$ELSE}
+  xmldom, XMLIntf, XMLDoc, EhLibXmlConsts,
+{$ENDIF}
+
+{$IFDEF EH_LIB_17} System.UITypes, System.Contnrs, {$ENDIF}
+{$IFDEF CIL}
+  EhLibVCLNET,
+  System.Runtime.InteropServices, System.Reflection,
+{$ELSE}
+  {$IFDEF FPC}
+    EhLibLCL, LCLType, Win32Extra,
+  {$ELSE}
+    EhLibVCL, Messages, SqlTimSt,
+  {$ENDIF}
+{$ENDIF}
+  Db, Clipbrd, ComObj, StdCtrls;
+
+{$IFDEF FPC}
+{$ELSE}
+
+type
+
+  TCustomFileZipingProviderEh = class;
+
+  TXlsxCellDataEh = class(TPersistent)
+  private
+    FColor: TColor;
+    FFont: TFont;
+    FValue: Variant;
+    FHorzLine: Boolean;
+    FVertLine: Boolean;
+    FDisplayText: String;
+    FDisplayFormat: String;
+    FAlignment: TAlignment;
+  public
+    constructor Create;
+    destructor Destroy; override;
+
+    procedure Clear;
+
+    property Value: Variant read FValue write FValue;
+    property DisplayText: String read FDisplayText write FDisplayText;
+    property DisplayFormat: String read FDisplayFormat write FDisplayFormat;
+    property Color: TColor read FColor write FColor;
+    property Font: TFont read FFont;
+    property HorzLine: Boolean read FHorzLine write FHorzLine;
+    property VertLine: Boolean read FVertLine write FVertLine;
+    property Alignment: TAlignment read FAlignment write FAlignment;
+  end;
+
+ { TXlsxFileWriterEh }
+
+  RStyle = record
+    NumFmt: Integer;
+    NumFont: Integer;
+    NumAlignment: Integer;
+    NumBackColor: Integer;
+    NumBorder: Integer;
+    Vertical: Boolean;
+    Wrap: Boolean;
+  end;
+
+  TXlsxFileWriterEh = class(TPersistent)
+  private
+    FBackColor: array of TColor;
+    FBorder: array of Integer;
+    FCurCol: Integer;
+    FCurRow: Integer;
+    FDataRowCount: Integer;
+    FFmtNode: IXMLNode;
+    FFonts: array of TFont;
+    FNumFmt: Integer;
+    FRowNode: IXMLNode;
+    FStyles: array of RStyle;
+    FXMLSheet: IXMLDocument;
+    FXMLStyles: IXMLDocument;
+    FZipFileProvider: TCustomFileZipingProviderEh;
+    FColCount: Integer;
+    FCellData: TXlsxCellDataEh;
+    FFileName: String;
+    function GetCurColNum: Integer;
+    function GetCurRowNum: Integer;
+  protected
+    function GetColWidth(ACol: Integer): Integer; virtual;
+    function InitTableCheckEof: Boolean; virtual;
+    function InitRowCheckEof(ARow: Integer): Boolean; virtual;
+    function GetColCount: Integer; virtual;
+    function SysVarToStr(var Val: Variant): String;
+
+    function SetBackColor(Color: TColor): Integer;
+    function SetBorder(Border: Integer): Integer;
+    function SetFont(Font: TFont): Integer;
+    function SetStyle(NumFmt: Integer; Font: TFont; Alignment: Integer; BackColor: TColor; Border: Integer; Vert, Wrap: Boolean): Integer;
+
+    procedure InitFileData; virtual;
+    procedure CreateXMLs; virtual;
+    procedure CreateStaticXMLs; virtual;
+    procedure CreateDynamicXMLs; virtual;
+
+    procedure WriteXMLs; virtual;
+    procedure WriteSheetXML; virtual;
+    procedure WriteColumnsSec(Root: IXMLNode); virtual;
+    procedure WriteStylesXML; virtual;
+    procedure SaveDataToFile; virtual;
+
+    procedure WriteRow(ARow: Integer; var Eof: Boolean); virtual;
+    procedure WriteValue(ACol, ARow: Integer); virtual;
+    procedure GetCellData(ACol, ARow: Integer; CellData: TXlsxCellDataEh); virtual;
+
+  public
+    constructor Create;
+    destructor Destroy; override;
+
+    procedure WritetToFile(const AFileName: String); virtual;
+    property CurRowNum: Integer read GetCurRowNum;
+    property CurColNum: Integer read GetCurColNum;
+  end;
+
+{ TCustomFileZipingProviderEh }
+
+  TCustomFileZipingProviderEh = class(TObject)
+  public
+    class function CreateInstance: TCustomFileZipingProviderEh; virtual;
+    function InitZipFile(FileName: String): TStream; virtual; abstract;
+    procedure AddFile(Data: TStream; const FilePathAndName: string); virtual; abstract;
+    procedure FinalizeZipFile; overload; virtual; abstract;
+    procedure FinalizeZipFile(AStream: TStream); overload; virtual; abstract;
+  end;
+
+  TCustomFileZipingProviderEhClass = class of TCustomFileZipingProviderEh;
+
+{$IFDEF EH_LIB_16} 
+
+{ TSystemZipFileProvider }
+
+  TSystemZipFileProviderEh = class(TCustomFileZipingProviderEh)
+  private
+    FStream: TStream;
+    FZipFile: TZipFile;
+  public
+    constructor Create;
+    destructor Destroy; override;
+
+    class function CreateInstance: TCustomFileZipingProviderEh; override;
+    function InitZipFile(FileName: String): TStream; override;
+    procedure AddFile(Data: TStream; const FilePathAndName: string); override;
+    procedure FinalizeZipFile; override;
+    procedure FinalizeZipFile(AStream: TStream); override;
+
+    property Stream: TStream read FStream write FStream;
+  end;
+
+{$ENDIF} 
+
+function ZipFileProviderClass: TCustomFileZipingProviderEhClass;
+function RegisterZipFileProviderClass(AZipFileProviderClass: TCustomFileZipingProviderEhClass): TCustomFileZipingProviderEhClass;
+
+function ZEGetA1ByCol(ColNum: Integer; StartZero: Boolean = True): string;
+function ZEGetColByA1(const A1Str: String; StartZero: Boolean = True): Integer;
+function ZEA1RectToRect(const A1Rect: String): TRect;
+function ZEA1CellToPoint(const A1CellRef: String): TPoint;
+function XlsxNumFormatToVCLFormat(const XlsxNumFormatId, XlsxNumFormat: String): String;
+function XlsxCellTypeNameToVaType(const tn: String): TVarType;
+
+{$ENDIF} // not Lazarus
+
+implementation

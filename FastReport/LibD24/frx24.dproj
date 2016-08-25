@@ -1,0 +1,233 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{E9B6219A-E915-4A53-86E8-3BCE09FA62E9}</ProjectGuid>
+        <MainSource>frx24.dpk</MainSource>
+        <Base>True</Base>
+        <Config Condition="'$(Config)'==''">Debug</Config>
+        <TargetedPlatforms>1025</TargetedPlatforms>
+        <AppType>Package</AppType>
+        <FrameworkType>VCL</FrameworkType>
+        <ProjectVersion>18.1</ProjectVersion>
+        <Platform Condition="'$(Platform)'==''">Win32</Platform>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Android' and '$(Base)'=='true') or '$(Base_Android)'!=''">
+        <Base_Android>true</Base_Android>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Base)'=='true') or '$(Base_Win32)'!=''">
+        <Base_Win32>true</Base_Win32>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_1)'!=''">
+        <Cfg_1>true</Cfg_1>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_2)'!=''">
+        <Cfg_2>true</Cfg_2>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='iOSDevice64' and '$(Cfg_2)'=='true') or '$(Cfg_2_iOSDevice64)'!=''">
+        <Cfg_2_iOSDevice64>true</Cfg_2_iOSDevice64>
+        <CfgParent>Cfg_2</CfgParent>
+        <Cfg_2>true</Cfg_2>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base)'!=''">
+        <DCC_S>false</DCC_S>
+        <DCC_N>false</DCC_N>
+        <GenDll>true</GenDll>
+        <RuntimeOnlyPackage>true</RuntimeOnlyPackage>
+        <VerInfo_Locale>1049</VerInfo_Locale>
+        <DCC_E>false</DCC_E>
+        <DCC_DebugInformation>1</DCC_DebugInformation>
+        <DCC_OutputNeverBuildDcps>true</DCC_OutputNeverBuildDcps>
+        <DCC_ImageBase>00400000</DCC_ImageBase>
+        <DCC_K>false</DCC_K>
+        <GenPackage>true</GenPackage>
+        <DCC_Namespace>Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
+        <DCC_F>false</DCC_F>
+        <DCC_WriteableConstants>true</DCC_WriteableConstants>
+        <SanitizedProjectName>frx24</SanitizedProjectName>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=;CFBundleName=</VerInfo_Keys>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_Android)'!=''">
+        <EnabledSysJars>android-support-v4.dex.jar;cloud-messaging.dex.jar;fmx.dex.jar;google-analytics-v2.dex.jar;google-play-billing.dex.jar;google-play-licensing.dex.jar;google-play-services.dex.jar</EnabledSysJars>
+        <VerInfo_Keys>package=com.embarcadero.$(MSBuildProjectName);label=$(MSBuildProjectName);versionCode=1;versionName=1.0.0;persistent=False;restoreAnyVersion=False;installLocation=auto;largeHeap=False;theme=TitleBar;hardwareAccelerated=true;apiKey=</VerInfo_Keys>
+        <BT_BuildType>Debug</BT_BuildType>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_Win32)'!=''">
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1)'!=''">
+        <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
+        <DCC_DebugInformation>0</DCC_DebugInformation>
+        <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+        <DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2)'!=''">
+        <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
+        <DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
+        <DCC_Optimize>false</DCC_Optimize>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2_iOSDevice64)'!=''">
+        <BT_BuildType>Debug</BT_BuildType>
+    </PropertyGroup>
+    <ItemGroup>
+        <DelphiCompile Include="$(MainSource)">
+            <MainSource>MainSource</MainSource>
+        </DelphiCompile>
+        <DCCReference Include="VCL.dcp"/>
+        <DCCReference Include="vclimg.dcp"/>
+        <DCCReference Include="fs24.dcp"/>
+        <DCCReference Include="frxAggregate.pas"/>
+        <DCCReference Include="frxChm.pas"/>
+        <DCCReference Include="frxClass.pas"/>
+        <DCCReference Include="frxClassRTTI.pas"/>
+        <DCCReference Include="frxCollections.pas"/>
+        <DCCReference Include="frxCtrls.pas"/>
+        <DCCReference Include="frxDialogForm.pas"/>
+        <DCCReference Include="frxDMPClass.pas"/>
+        <DCCReference Include="frxDMPExport.pas"/>
+        <DCCReference Include="frxDock.pas"/>
+        <DCCReference Include="frxEngine.pas"/>
+        <DCCReference Include="frxGraphicUtils.pas"/>
+        <DCCReference Include="frxPassw.pas"/>
+        <DCCReference Include="frxPictureCache.pas"/>
+        <DCCReference Include="frxPreview.pas"/>
+        <DCCReference Include="frxPreviewPages.pas"/>
+        <DCCReference Include="frxPreviewPageSettings.pas"/>
+        <DCCReference Include="frxPrintDialog.pas"/>
+        <DCCReference Include="frxPrinter.pas"/>
+        <DCCReference Include="frxProgress.pas"/>
+        <DCCReference Include="frxrcClass.pas"/>
+        <DCCReference Include="frxRes.pas"/>
+        <DCCReference Include="frxSearchDialog.pas"/>
+        <DCCReference Include="frxUnicodeUtils.pas"/>
+        <DCCReference Include="frxUtils.pas"/>
+        <DCCReference Include="frxVariables.pas"/>
+        <DCCReference Include="frxXML.pas"/>
+        <DCCReference Include="frxXMLSerializer.pas"/>
+        <DCCReference Include="frxMD5.pas"/>
+        <DCCReference Include="frxAbout.pas"/>
+        <DCCReference Include="frxCodeUtils.pas"/>
+        <DCCReference Include="frxConnEditor.pas"/>
+        <DCCReference Include="frxConnItemEdit.pas"/>
+        <DCCReference Include="frxCustomEditors.pas"/>
+        <DCCReference Include="frxDataTree.pas"/>
+        <DCCReference Include="frxDesgn.pas"/>
+        <DCCReference Include="frxDesgnCtrls.pas"/>
+        <DCCReference Include="frxDesgnEditors.pas"/>
+        <DCCReference Include="frxDesgnWorkspace.pas"/>
+        <DCCReference Include="frxDesgnWorkspace1.pas"/>
+        <DCCReference Include="frxDsgnIntf.pas"/>
+        <DCCReference Include="frxEditAliases.pas"/>
+        <DCCReference Include="frxEditDataBand.pas"/>
+        <DCCReference Include="frxEditExpr.pas"/>
+        <DCCReference Include="frxEditFormat.pas"/>
+        <DCCReference Include="frxEditFrame.pas"/>
+        <DCCReference Include="frxEditGroup.pas"/>
+        <DCCReference Include="frxEditHighlight.pas"/>
+        <DCCReference Include="frxEditHyperlink.pas"/>
+        <DCCReference Include="frxEditFill.pas"/>
+        <DCCReference Include="frxEditMemo.pas"/>
+        <DCCReference Include="frxEditOptions.pas"/>
+        <DCCReference Include="frxEditPage.pas"/>
+        <DCCReference Include="frxEditPicture.pas"/>
+        <DCCReference Include="frxEditReport.pas"/>
+        <DCCReference Include="frxEditReportData.pas"/>
+        <DCCReference Include="frxEditStrings.pas"/>
+        <DCCReference Include="frxEditStyle.pas"/>
+        <DCCReference Include="frxEditSysMemo.pas"/>
+        <DCCReference Include="frxEditTabOrder.pas"/>
+        <DCCReference Include="frxEditVar.pas"/>
+        <DCCReference Include="frxEvaluateForm.pas"/>
+        <DCCReference Include="frxInheritError.pas"/>
+        <DCCReference Include="frxInsp.pas"/>
+        <DCCReference Include="frxNewItem.pas"/>
+        <DCCReference Include="frxPopupForm.pas"/>
+        <DCCReference Include="frxrcDesgn.pas"/>
+        <DCCReference Include="frxrcInsp.pas"/>
+        <DCCReference Include="frxReportTree.pas"/>
+        <DCCReference Include="frxStdWizard.pas"/>
+        <DCCReference Include="frxSynMemo.pas"/>
+        <DCCReference Include="frxUnicodeCtrls.pas"/>
+        <DCCReference Include="frxWatchForm.pas"/>
+        <DCCReference Include="frxBarcod.pas"/>
+        <DCCReference Include="frxBarcode.pas"/>
+        <DCCReference Include="frxBarcode2D.pas"/>
+        <DCCReference Include="frxBarcode2DBase.pas"/>
+        <DCCReference Include="frxBarcode2DRTTI.pas"/>
+        <DCCReference Include="frxBarcodeDataMatrix.pas"/>
+        <DCCReference Include="frxBarcodePDF417.pas"/>
+        <DCCReference Include="frxBarcodeProperties.pas"/>
+        <DCCReference Include="frxBarcodeQR.pas"/>
+        <DCCReference Include="frxDelphiZXingQRCode.pas"/>
+        <DCCReference Include="frxBarcodeEditor.pas"/>
+        <DCCReference Include="frxBarcodeRTTI.pas"/>
+        <DCCReference Include="frxChBox.pas"/>
+        <DCCReference Include="frxChBoxRTTI.pas"/>
+        <DCCReference Include="frxCross.pas"/>
+        <DCCReference Include="frxCrossEditor.pas"/>
+        <DCCReference Include="frxCrossRTTI.pas"/>
+        <DCCReference Include="frxDCtrl.pas"/>
+        <DCCReference Include="frxDCtrlRTTI.pas"/>
+        <DCCReference Include="frxGradient.pas"/>
+        <DCCReference Include="frxGradientRTTI.pas"/>
+        <DCCReference Include="frxOLE.pas"/>
+        <DCCReference Include="frxOLEEditor.pas"/>
+        <DCCReference Include="frxOLERTTI.pas"/>
+        <DCCReference Include="frxRich.pas"/>
+        <DCCReference Include="frxRichEdit.pas"/>
+        <DCCReference Include="frxRichEditor.pas"/>
+        <DCCReference Include="frxRichRTTI.pas"/>
+        <DCCReference Include="frxGZip.pas"/>
+        <DCCReference Include="frxZLib.pas"/>
+        <DCCReference Include="frxCrypt.pas"/>
+        <DCCReference Include="rc_AlgRef.pas"/>
+        <DCCReference Include="rc_ApiRef.pas"/>
+        <DCCReference Include="rc_Crypt.pas"/>
+        <BuildConfiguration Include="Debug">
+            <Key>Cfg_2</Key>
+            <CfgParent>Base</CfgParent>
+        </BuildConfiguration>
+        <BuildConfiguration Include="Base">
+            <Key>Base</Key>
+        </BuildConfiguration>
+        <BuildConfiguration Include="Release">
+            <Key>Cfg_1</Key>
+            <CfgParent>Base</CfgParent>
+        </BuildConfiguration>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Delphi.Personality.12</Borland.Personality>
+        <Borland.ProjectType>Package</Borland.ProjectType>
+        <BorlandProject>
+            <Delphi.Personality>
+                <Source>
+                    <Source Name="MainSource">frx24.dpk</Source>
+                </Source>
+            </Delphi.Personality>
+            <Platforms>
+                <Platform value="Android">False</Platform>
+                <Platform value="iOSDevice32">False</Platform>
+                <Platform value="iOSDevice64">True</Platform>
+                <Platform value="iOSSimulator">False</Platform>
+                <Platform value="Win32">True</Platform>
+                <Platform value="Win64">False</Platform>
+            </Platforms>
+        </BorlandProject>
+        <ProjectFileVersion>12</ProjectFileVersion>
+    </ProjectExtensions>
+    <Import Project="$(BDS)\Bin\CodeGear.Delphi.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')"/>
+    <Import Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj" Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')"/>
+</Project>

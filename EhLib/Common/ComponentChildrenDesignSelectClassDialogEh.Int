@@ -1,0 +1,41 @@
+{*******************************************************}
+{                                                       }
+{                       EhLib v8.2                      }
+{               TSelectImpExpClassForm form             }
+{                      Build 8.2.001                    }
+{                                                       }
+{   Copyright (c) 2015-2015 by Dmitry V. Bolshakov      }
+{                                                       }
+{*******************************************************}
+
+{$I EhLib.Inc}
+
+unit ComponentChildrenDesignSelectClassDialogEh;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants,
+  Classes, Graphics, Controls, Forms, Dialogs, StdCtrls, ExtCtrls;
+
+type
+  TSelectImpExpClassForm = class(TForm)
+    bOk: TButton;
+    bCancel: TButton;
+    Bevel1: TBevel;
+    ListBox1: TListBox;
+    procedure ListBox1Click(Sender: TObject);
+    procedure ListBox1KeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+  private
+    { Private declarations }
+  public
+    procedure UpdateState;
+  end;
+
+var
+  SelectImpExpClassForm: TSelectImpExpClassForm;
+
+function SelectComponentChildEhClass(MasterComponentClass: TComponentClass): TComponentClass;
+
+implementation

@@ -1,0 +1,56 @@
+{*******************************************************}
+{                                                       }
+{                     EhLib v8.2                        }
+{                                                       }
+{             TMemTableDataForm component               }
+{                    Build 8.2.03                       }
+{                                                       }
+{        Copyright (c) 2003-12 by EhLib Team and        }
+{                Dmitry V. Bolshakov                    }
+{                                                       }
+{*******************************************************}
+
+unit MemTableEditEh;
+
+{$I EhLib.Inc}
+
+interface
+
+uses SysUtils, Windows, Messages, Classes, Graphics, Controls,
+{$IFDEF CIL}
+  Borland.Vcl.Design.DesignIntf,
+  Borland.Vcl.Design.DsnDBCst,
+{$ELSE}
+  DsnDBCst,
+  {$IFDEF EH_LIB_6} DesignIntf,
+  {$ELSE} DsgnIntf, {$ENDIF}
+{$ENDIF}
+  Forms, Dialogs, StdCtrls, Buttons, DB, MemTableEh;
+
+type
+
+  TMemTableDataForm = class(TForm)
+    GroupBox1: TGroupBox;
+    DataSetList: TListBox;
+    OkBtn: TButton;
+    CancelBtn: TButton;
+    HelpBtn: TButton;
+    procedure FormCreate(Sender: TObject);
+    procedure OkBtnClick(Sender: TObject);
+    procedure HelpBtnClick(Sender: TObject);
+    procedure DataSetListDblClick(Sender: TObject);
+    procedure DataSetListKeyPress(Sender: TObject; var Key: Char);
+  private
+    FDataSet: TCustomMemTableEh;
+{$IFDEF EH_LIB_6}
+    FDesigner: IDesigner;
+{$ELSE}
+    FDesigner: IFormDesigner;
+{$ENDIF}
+    procedure CheckComponent(const Value: string);
+    function Edit: Boolean;
+  end;
+
+function EditMemTable(ADataSet: TCustomMemTableEh; ADesigner: IDesigner): Boolean;
+
+implementation

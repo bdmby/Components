@@ -1,0 +1,96 @@
+{*******************************************************}
+{                                                       }
+{                        EhLib v8.2                     }
+{                                                       }
+{                      SpreadGridsEh                    }
+{                      Build 8.2.003                    }
+{                                                       }
+{   Copyright (c) 2015-2015 by Dmitry V. Bolshakov      }
+{                                                       }
+{*******************************************************}
+
+{$I EhLib.Inc}
+
+unit SpreadGridsEh;
+
+interface
+
+uses
+{$IFDEF EH_LIB_17} System.Generics.Collections, {$ENDIF}
+  Windows, SysUtils, Messages, Classes, Controls, Forms, StdCtrls, TypInfo,
+{$IFDEF EH_LIB_5} Contnrs, {$ENDIF}
+{$IFDEF EH_LIB_6} Variants, Types, {$ENDIF}
+{$IFDEF EH_LIB_7} Themes, UxTheme, {$ENDIF}
+{$IFDEF EH_LIB_17} System.UITypes, {$ENDIF}
+{$IFDEF CIL}
+  EhLibVCLNET,
+  WinUtils,
+{$ELSE}
+  {$IFDEF FPC}
+  EhLibLCL,
+  {$ELSE}
+  EhLibVCL,
+  {$ENDIF}
+{$ENDIF}
+  GridsEh, ToolCtrlsEh, Graphics;
+
+type
+
+{ TSpreadGridCellEh }
+
+  TSpreadGridCellEh = class(TPersistent)
+  private
+    FValue: Variant;
+    FMasterMergeColOffset: Integer;
+    FMasterMergeRowOffset: Integer;
+    FMergeColCount: Integer;
+    FMergeRowCount: Integer;
+  public
+    procedure Clear; virtual;
+    property Value: Variant read FValue write FValue;
+    property MasterMergeColOffset: Integer read FMasterMergeColOffset;
+    property MasterMergeRowOffset: Integer read FMasterMergeRowOffset;
+    property MergeColCount: Integer read FMergeColCount;
+    property MergeRowCount: Integer read FMergeRowCount;
+  end;
+
+  TSpreadGridArray = array of array of TSpreadGridCellEh;
+
+{ TCustomSpreadGridEh }
+
+  TCustomSpreadGridEh = class(TCustomGridEh)
+  private
+    FSpreadArray: TSpreadGridArray;
+//    FDrawenCellArr: array of Boolean;
+    FDrawenCellArr: array of TGridCoord;
+//    FDrawColCount, FDrawRowCount: Integer;
+    function GetVisibleColCount: Integer;
+    function GetVisibleRowCount: Integer;
+    function GetCell(ACol, ARow: Integer): TSpreadGridCellEh;
+  protected
+    function NeedBufferedPaint: Boolean; override;
+    function GetCellDisplayText(ACol, ARow: Integer): String; virtual;
+    function CheckCellAreaDrawn(ACol, ARow: Integer): Boolean; virtual;
+    function CreateSpreadGridCell(ACol, ARow: Integer): TSpreadGridCellEh; virtual;
+
+    procedure Paint; override;
+    procedure SetCellDrawn(ACol, ARow: Integer);
+    procedure SetSpreadArraySize(AColCount, ARowCount: Integer);
+    procedure SetCellCanvasParams(ACol, ARow: Integer; ARect: TRect; State: TGridDrawState); virtual;
+    procedure DrawCell(ACol, ARow: Integer; ARect: TRect; State: TGridDrawState); override;
+    procedure DrawCellArea(ACol, ARow: Integer; ARect: TRect; State: TGridDrawState); override;
+    procedure DrawMasterCell(ACol, ARow: Integer; ARect: TRect; State: TGridDrawState; SpreadCell: TSpreadGridCellEh); virtual;
+    procedure DrawMasterForMergedCell(ACol, ARow: Integer; ARect: TRect; State: TGridDrawState); virtual;
+
+    property SpreadArray: TSpreadGridArray read FSpreadArray;
+    property VisibleColCount: Integer read GetVisibleColCount;
+    property VisibleRowCount: Integer read GetVisibleRowCount;
+  public
+    constructor Create(AOwner: TComponent); override;
+    destructor Destroy; override;
+    procedure SetGridSize(ANewColCount, ANewRowCount: Integer); virtual;
+    procedure MergeCells(BaseCellCol, BaseCellRow, MergeColCount, MergeRowCount: Integer);
+    property Cell[ACol, ARow: Integer]: TSpreadGridCellEh read GetCell;
+  end;
+
+implementation

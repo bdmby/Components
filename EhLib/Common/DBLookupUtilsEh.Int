@@ -1,0 +1,180 @@
+{*******************************************************}
+{                                                       }
+{                       EhLib v8.2                      }
+{                    DBLookupUtilsEh                    }
+{                      Build 8.2.09                     }
+{                                                       }
+{      Copyright (c) 2001-2015 by Dmitry V. Bolshakov   }
+{                                                       }
+{*******************************************************}
+
+{$I EhLib.Inc}
+
+unit DBLookupUtilsEh;
+
+interface
+
+uses
+  SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+{$IFDEF EH_LIB_6}Variants, {$ENDIF}
+  Db, DBCtrls, Buttons, ToolCtrlsEh, Menus,
+{$IFDEF CIL}
+  EhLibVCLNET,
+{$ELSE}
+  {$IFDEF FPC}
+    EhLibLCL, LCLType, Win32Extra,
+  {$ELSE}
+    EhLibVCL, Messages,
+  {$ENDIF}
+{$ENDIF}
+  DBCtrlsEh;
+
+type
+
+  TDBLookupDataEh = class;
+
+{ TLookupListEh }
+
+  PLookupPairEh = ^TLookupPairEh;
+  TLookupPairEh = record
+    KeyValue: Variant;
+    DisplayValue: Variant;
+  end;
+
+  TLookupListEh = class(TObject)
+  private
+    FList: TList;
+  protected
+    function FindKeyValueIndex(const KeyValue: Variant; var Index: Integer): Boolean;
+    procedure QuickSort(L, R: Integer);
+  public
+    constructor Create;
+    destructor Destroy; override;
+
+    function ValueOfKey(const AKeyValue: Variant): Variant;
+    procedure Add(const AKeyValue, ADisplayValue: Variant);
+    procedure Clear;
+    procedure SortData;
+  end;
+
+{ TDataSourceLinkEh }
+
+  TDataSourceLinkEh = class(TDataLink)
+  private
+    FLookupData: TDBLookupDataEh;
+  protected
+    procedure ActiveChanged; override;
+    procedure LayoutChanged; override;
+    procedure RecordChanged(Field: TField); override;
+  public
+    constructor Create;
+  end;
+
+{ TListSourceLinkEh }
+
+  TListSourceLinkEh = class(TDataLink)
+  private
+    FLookupData: TDBLookupDataEh;
+  protected
+    procedure ActiveChanged; override;
+    procedure DataSetChanged; override;
+    procedure LayoutChanged; override;
+  public
+    constructor Create;
+  end;
+
+{ TDBLookupDataEh }
+
+  TDBLookupDataEh = class(TPersistent)
+  private
+    FAxisBar: TCollectionItem;
+    FDataLink: TDataSourceLinkEh;
+    FInternalLookupSource: TDataSource;
+    FKeyFieldNames: String;
+    FKeyFields: TFieldsArrEh;
+    FLookupActive: Boolean;
+    FLookupCache: Boolean;
+    FLookupDataSet: TDataSet;
+    FLookupDisplayField: TField;
+    FLookupDisplayFieldName: String;
+    FLookupInDataField: Boolean;
+    FLookupIsSetUp: Boolean;
+    FLookupKeyFieldNames: String;
+    FLookupKeyFields: TFieldsArrEh;
+    FLookupLink: TListSourceLinkEh;
+    FLookupListActive: Boolean;
+    FLookupListCache: TLookupListEh;
+//    FLookupSource: TDataSource;
+
+    function GetDataLink: TDataSourceLinkEh;
+    function GetDataSource: TDataSource;
+    function GetKeyFieldNames: String;
+    function GetKeyFields: TFieldsArrEh;
+    function GetLookupActive: Boolean;
+    function GetLookupDataSet: TDataSet;
+    function GetLookupDisplayField: TField;
+    function GetLookupDisplayFieldName: String;
+    function GetLookupIsSetUp: Boolean;
+    function GetLookupKeyFieldNames: String;
+    function GetLookupKeyFields: TFieldsArrEh;
+
+    procedure CheckLookupInDataField;
+    procedure CheckNotCircular;
+    procedure SetKeyFieldNames(const Value: String);
+    procedure SetLookupCache(const Value: Boolean);
+    procedure SetLookupDataSet(const Value: TDataSet);
+    procedure SetLookupDisplayFieldName(const Value: String);
+    procedure SetLookupInDataField(Value: Boolean);
+    procedure SetLookupKeyFieldNames(const Value: String);
+    function GetKeyFieldsIsNull: Boolean;
+
+  protected
+    FDataFieldsUpdating: Boolean;
+
+    function GetMTLookupValue(RowNum: Integer): Variant; virtual;
+    function GetOwner: TPersistent; override;
+
+    procedure ActiveChanged; virtual;
+    procedure DataChanged; virtual;
+    procedure ListLinkDataChanged; virtual;
+    procedure Notification(AComponent: TComponent; Operation: TOperation);
+    procedure UpdateDataFields; virtual;
+    procedure UpdateListFields; virtual;
+    procedure UpdateListLinkDataSource; virtual;
+    procedure UpdateLookupActiveState;
+    procedure UpdateLookupSetupState;
+
+    property DataLink: TDataSourceLinkEh read GetDataLink;
+    property LookupListActive: Boolean read FLookupListActive;
+    property ListLink: TListSourceLinkEh read FLookupLink;
+  public
+    constructor Create(AColumn: TCollectionItem);
+    destructor Destroy; override;
+
+    function GetLookupValue: Variant;
+    function LookupDataIsStored: Boolean;
+
+    procedure Assign(Source: TPersistent); override;
+    procedure RefreshLookupListCache;
+    procedure UpdateLookupState;
+
+    property AxisBar: TCollectionItem read FAxisBar;
+    property DataSource: TDataSource read GetDataSource;
+    property KeyFields: TFieldsArrEh read GetKeyFields;
+    property LookupActive: Boolean read GetLookupActive; {write SetLookupActive;}
+    property LookupDisplayField: TField read GetLookupDisplayField;
+    property LookupInDataField: Boolean read FLookupInDataField;
+    property LookupIsSetUp: Boolean read GetLookupIsSetUp;
+    property LookupKeyFields: TFieldsArrEh read GetLookupKeyFields;
+    property LookupListSource: TDataSource read FInternalLookupSource;
+    property KeyFieldsIsNull: Boolean read GetKeyFieldsIsNull;
+
+  published
+    property KeyFieldNames: String read GetKeyFieldNames write SetKeyFieldNames stored LookupDataIsStored;
+    property LookupCache: Boolean read FLookupCache write SetLookupCache default True;
+    property LookupDataSet: TDataSet read GetLookupDataSet write SetLookupDataSet stored LookupDataIsStored;
+    property LookupDisplayFieldName: String read GetLookupDisplayFieldName write SetLookupDisplayFieldName stored LookupDataIsStored;
+    property LookupKeyFieldNames: String read GetLookupKeyFieldNames write SetLookupKeyFieldNames stored LookupDataIsStored;
+  end;
+
+implementation

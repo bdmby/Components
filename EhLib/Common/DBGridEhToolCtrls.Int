@@ -1,0 +1,318 @@
+{*******************************************************}
+{                                                       }
+{                        EhLib v8.2                     }
+{                                                       }
+{          Tool Controls for DBGridEh component         }
+{                      Build 8.2.031                    }
+{                                                       }
+{   Copyright (c) 2011-2015 by Dmitry V. Bolshakov      }
+{                                                       }
+{*******************************************************}
+
+{$I EhLib.Inc}
+
+unit DBGridEhToolCtrls;
+
+interface
+
+uses Windows, SysUtils, Classes, Controls, Forms, StdCtrls,
+{$IFDEF EH_LIB_6} Variants, Types, {$ENDIF}
+{$IFDEF EH_LIB_7} Themes, UxTheme, {$ENDIF}
+{$IFDEF EH_LIB_17} System.UITypes, {$ENDIF}
+{$IFDEF CIL}
+  EhLibVCLNET,
+  WinUtils,
+{$ELSE}
+  {$IFDEF FPC}
+  EhLibLCL, LMessages, LCLType, Win32Extra,
+  {$ELSE}
+  EhLibVCL, Messages, SqlTimSt,
+  {$ENDIF}
+{$ENDIF}
+  GridsEh, GridToolCtrlsEh, DBGridEhGrouping, DBCtrlsEh, ToolCtrlsEh,
+  DBAxisGridsEh, SearchPanelsEh,
+  Graphics, DBCtrls, ExtCtrls, Db, Buttons, ImgList, Menus;
+
+type
+
+  TDBGridEhRes = class(TDataModule)
+    IMList10: TImageList;
+    IMList10D: TImageList;
+    IMList12_D: TImageList;
+    IMList12: TImageList;
+    PopupMenu1: TPopupMenu;
+    Copy1: TMenuItem;
+    IMList10Bmp: TImageList;
+    IMList10DBmp: TImageList;
+    procedure Copy1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+  TDBGridEhNavigatorPanel = class;
+  TNavButtonEh = class;
+  TNavDataLinkEh = class;
+  TNavFindButtonEh = class;
+  TDBGridSearchPanelControlEh = class;
+
+//  TSearchPanelLocationEh = (splGridTopEh, splHorzScrollBarExtraPanelEh, splExternal);  //splHSBExtraPanelEh
+
+  TSelectionInfoPanelDataItemEh = record
+    Text: String;
+    Start: Integer;
+    Finish: Integer;
+  end;
+
+  { TDBGridEhScrollBarPanelControl }
+
+  TDBGridEhScrollBarPanelControl = class(TGridScrollBarPanelControlEh)
+  private
+    FExtraPanel: TDBGridEhNavigatorPanel;
+    function GetOnScroll: TScrollEvent;
+    procedure SetOnScroll(const Value: TScrollEvent);
+
+  protected
+    function ScrollBatCode: Integer;
+    procedure AlignControls(AControl: TControl; var Rect: TRect); override;
+    procedure Resize; override;
+    procedure CreateHandle; override;
+    procedure OnScrollEvent(Sender: TObject; ScrollCode: TScrollCode; var ScrollPos: Integer);
+
+  public
+    constructor Create(AOwner: TComponent; AKind: TScrollBarKind); reintroduce;
+    destructor Destroy; override;
+    function MaxSizeForExtraPanel: Integer;
+    procedure Invalidate; override;
+    procedure GridSelectionChanged;
+    procedure DataSetChanged; virtual;
+    procedure SetParams(APosition, AMin, AMax, APageSize: Integer);
+    property OnScroll: TScrollEvent read GetOnScroll write SetOnScroll;
+    property ExtraPanel: TDBGridEhNavigatorPanel read FExtraPanel;
+  end;
+
+  TDBGridSearchPanelTextEditEh = class(TSearchPanelTextEditEh)
+  end;
+
+{ TDBGridEhNavigatorPanel }
+
+  TGridSBItemEh = (gsbiRecordsInfoEh, gsbiNavigator, {gsbiFindEditorEh, }gsbiSelAggregationInfoEh);
+  TGridSBItemsEh = set of TGridSBItemEh;
+
+  TNavigateBtnEh = (nbFirstEh, nbPriorEh, nbNextEh, nbLastEh,
+                  nbInsertEh, nbDeleteEh, nbEditEh, nbPostEh, nbCancelEh, nbRefreshEh);
+  TNavButtonSetEh = set of TNavigateBtnEh;
+
+
+  TNavClickEh = procedure (Sender: TObject; Button: TNavigateBtnEh) of object;
+
+  TDBGridEhNavigatorPanel = class (TCustomControl)
+  private
+    FDataLink: TNavDataLinkEh;
+    FVisibleButtons: TNavButtonSetEh;
+    FHints: TStrings;
+    FDefHints: TStrings;
+    ButtonWidth: Integer;
+    MinBtnSize: TPoint;
+    FOnNavClick: TNavClickEh;
+    FBeforeAction: TNavClickEh;
+    FocusedButton: TNavigateBtnEh;
+    FFlat: Boolean;
+    FDisabledImages: TCustomImageList;
+    FImages: TCustomImageList;
+    FBorderColor: TColor;
+    FSelectionInfoPanelText: String;
+    FVisibleItems: TGridSBItemsEh;
+    FSearchPanelControl: TDBGridSearchPanelControlEh;
+
+    function GetDataSource: TDataSource;
+    function GetHints: TStrings;
+
+    procedure BtnMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure ClickHandler(Sender: TObject);
+    procedure CMEnabledChanged(var Message: TMessage); message CM_ENABLEDCHANGED;
+    procedure CMParentFontChanged(var Message: TMessage); message CM_PARENTFONTCHANGED;
+    procedure HintsChanged(Sender: TObject);
+    procedure InitHints;
+    procedure InitItems;
+    procedure SetBorderColor(const Value: TColor);
+    procedure SetDataSource(Value: TDataSource);
+    procedure SetDisabledImages(const Value: TCustomImageList);
+    procedure SetFlat(Value: Boolean);
+    procedure SetHints(Value: TStrings);
+    procedure SetImages(const Value: TCustomImageList);
+    procedure SetSearchPanelControl(const Value: TDBGridSearchPanelControlEh);
+    procedure SetSize(var W: Integer; var H: Integer);
+    procedure SetVisibleButtons(Value: TNavButtonSetEh);
+    procedure SetVisibleItems(const Value: TGridSBItemsEh);
+
+    procedure WMGetDlgCode(var Message: TWMGetDlgCode); message WM_GETDLGCODE;
+    procedure WMKillFocus(var Message: TWMKillFocus); message WM_KILLFOCUS;
+    procedure WMNCPaint(var Message: TWMNCPaint); message WM_NCPAINT;
+    procedure WMSetFocus(var Message: TWMSetFocus); message WM_SETFOCUS;
+    procedure WMSize(var Message: TWMSize);  message WM_SIZE;
+    procedure WMWindowPosChanging(var Message: TWMWindowPosChanging); message WM_WINDOWPOSCHANGING;
+    function GetVisible: Boolean;
+    procedure SetVisible(const Value: Boolean); {$IFDEF FPC} reintroduce; {$ENDIF}
+  protected
+    FindEditDivider: TNavButtonEh;
+    NavButtons: array[TNavigateBtnEh] of TNavButtonEh;
+    NavButtonsDivider: TNavButtonEh;
+    RecordsInfoPanel: TNavButtonEh;
+    SelectionInfoDivider: TNavButtonEh;
+    SelectionInfoPanel: TNavButtonEh;
+    SelectionInfoPanelDataEh: array of TSelectionInfoPanelDataItemEh;
+
+    function CalcWidthForRecordsInfoPanel: Integer;
+    function CalcWidthSelectionInfoPanel: Integer;
+    function CanAutoSize(var NewWidth, NewHeight: Integer): Boolean; override;
+
+    procedure ActiveChanged;
+    procedure CalcMinSize(var W, H: Integer);
+    procedure CreateWnd; override;
+    procedure DataChanged;
+    procedure DrawNonClientBorder;
+    procedure EditingChanged;
+    procedure GridSelectionChanged;
+    procedure KeyDown(var Key: Word; Shift: TShiftState); override;
+    procedure Loaded; override;
+    procedure Notification(AComponent: TComponent; Operation: TOperation); override;
+    procedure Paint; override;
+    procedure PaintDivider(Sender: TObject);
+    procedure PaintRecordsInfo(Sender: TObject);
+    procedure ResetVisibleControls;
+    procedure Resize; override;
+    procedure SelectionInfoPanelMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+
+  public
+    constructor Create(AOwner: TComponent); override;
+    destructor Destroy; override;
+
+    function CheckConfirmDelete: Boolean;
+    function DividerWidth: Integer; virtual;
+    function GetSelectionInfoPanelText: String;
+    function OptimalWidth: Integer;
+
+    procedure GetChildren(Proc: TGetChildProc; Root: TComponent); override;
+    procedure NavBtnClick(Index: TNavigateBtnEh); virtual;
+    procedure ResetWidth;
+    procedure SetBounds(ALeft, ATop, AWidth, AHeight: Integer); override;
+
+    property BeforeAction: TNavClickEh read FBeforeAction write FBeforeAction;
+    property BorderColor: TColor read FBorderColor write SetBorderColor;
+    property DataSource: TDataSource read GetDataSource write SetDataSource;
+    property DisabledImages: TCustomImageList read FDisabledImages write SetDisabledImages;
+    property Flat: Boolean read FFlat write SetFlat default False;
+    property Hints: TStrings read GetHints write SetHints;
+    property Images: TCustomImageList read FImages write SetImages;
+    property SearchPanelControl: TDBGridSearchPanelControlEh read FSearchPanelControl write SetSearchPanelControl;
+    property VisibleButtons: TNavButtonSetEh read FVisibleButtons write SetVisibleButtons default [nbFirstEh, nbPriorEh, nbNextEh, nbLastEh, nbInsertEh, nbDeleteEh, nbEditEh, nbPostEh, nbCancelEh, nbRefreshEh];
+    property VisibleItems: TGridSBItemsEh read FVisibleItems write SetVisibleItems default [gsbiRecordsInfoEh, gsbiNavigator, gsbiSelAggregationInfoEh];
+    property Visible: Boolean read GetVisible write SetVisible;
+  end;
+
+{ TNavButtonEh }
+
+{$IFDEF FPC}
+  TNavButtonStyle = set of (nsAllowTimer, nsFocusRect);
+{$ENDIF}
+
+  TNavButtonEh = class(TSpeedButton)
+  private
+    FDisabledImages: TCustomImageList;
+    FImageIndex: Integer;
+    FImages: TCustomImageList;
+    FIndex: TNavigateBtnEh;
+    FNavStyle: TNavButtonStyle;
+    FOnPaint: TNotifyEvent;
+    FRepeatTimer: TTimer;
+
+    procedure SetDisabledImages(const Value: TCustomImageList);
+    procedure SetImageIndex(const Value: Integer);
+    procedure SetImages(const Value: TCustomImageList);
+    procedure TimerExpired(Sender: TObject);
+
+  protected
+    procedure MouseDown(Button: TMouseButton; Shift: TShiftState; X, Y: Integer); override;
+    procedure MouseUp(Button: TMouseButton; Shift: TShiftState; X, Y: Integer); override;
+    procedure Paint; override;
+
+  public
+    constructor Create(AOwner: TComponent); reintroduce;
+    destructor Destroy; override;
+
+    property DisabledImages: TCustomImageList read FDisabledImages write SetDisabledImages;
+    property ImageIndex: Integer read FImageIndex write SetImageIndex;
+    property Images: TCustomImageList read FImages write SetImages;
+    property Index: TNavigateBtnEh read FIndex write FIndex;
+    property NavStyle: TNavButtonStyle read FNavStyle write FNavStyle;
+    property OnPaint: TNotifyEvent read FOnPaint write FOnPaint;
+  end;
+
+  TNavFindButtonEh = class(TNavButtonEh)
+  private
+    FIndex: TDBGridEhNavigatorFindBtn;
+  public
+    property Index: TDBGridEhNavigatorFindBtn read FIndex write FIndex;
+  end;
+
+{ TNavDataLink }
+
+  TNavDataLinkEh = class(TDataLink)
+  private
+    FNavigator: TDBGridEhNavigatorPanel;
+  protected
+    procedure ActiveChanged; override;
+    procedure DataSetChanged; override;
+    procedure EditingChanged; override;
+  public
+    constructor Create(ANav: TDBGridEhNavigatorPanel);
+    destructor Destroy; override;
+  end;
+
+{ TDBGridSearchPanelControlEh }
+
+  TDBGridSearchPanelControlEh = class(TSearchPanelControlEh)
+  private
+  protected
+    function CancelSearchFilterEnable: Boolean; override;
+    function CreateSearchPanelTextEdit: TSearchPanelTextEditEh; override;
+    function GetMasterControlSearchEditMode: Boolean; override;
+    function MasterControlFilterEnabled: Boolean; override;
+    function IsOptionsButtonVisible: Boolean; override;
+
+    procedure AcquireMasterControlFocus; override;
+    procedure BuildOptionsPopupMenu(var PopupMenu: TPopupMenu); override;
+    procedure MasterControlFindNext; override;
+    procedure MasterControlFindPrev; override;
+    procedure MasterControlProcessFindEditorKeyPress(var Key: Char); override;
+    procedure MasterControlProcessFindEditorKeyDown(var Key: Word; Shift: TShiftState); override;
+    procedure MasterControlProcessFindEditorKeyUp(var Key: Word; Shift: TShiftState); override;
+    procedure MasterControlCancelSearchEditorMode; override;
+    procedure MasterControlApplySearchFilter; override;
+
+    procedure SetGetMasterControlSearchEditMode(Value: Boolean); override;
+    procedure MenuSearchScopesClick(Sender: TObject); virtual;
+
+  public
+    constructor Create(AOwner: TComponent); override;
+    destructor Destroy; override;
+
+    function CanPerformSearchActionInMasterControl: Boolean; override;
+    function FilterOnTyping: Boolean; override;
+    function FilterEnabled: Boolean; override;
+    function GetBorderColor: TColor; override;
+    function GetFindEditorBorderColor: TColor; override;
+
+    procedure FindEditorUserChanged; override;
+    procedure ClearSearchFilter; override;
+
+    procedure GetPaintColors(var FromColor, ToColor, HighlightColor: TColor); override;
+
+  end;
+
+var
+  DBGridEhRes: TDBGridEhRes;
+
+implementation

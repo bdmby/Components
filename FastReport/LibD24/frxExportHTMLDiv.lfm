@@ -1,0 +1,220 @@
+object frxHTMLDIVExportDialog: TfrxHTMLDIVExportDialog
+  Tag = 9173
+  Left = 318
+  Height = 370
+  Top = 174
+  Width = 288
+  ActiveControl = OkB
+  BorderStyle = bsDialog
+  Caption = 'Caption'
+  ClientHeight = 370
+  ClientWidth = 288
+  Color = clBtnFace
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  KeyPreview = True
+  OnCreate = FormCreate
+  OnKeyDown = FormKeyDown
+  Position = poScreenCenter
+  LCLVersion = '1.4.4.0'
+  object OkB: TButton
+    Tag = 1
+    Left = 124
+    Height = 25
+    Top = 338
+    Width = 75
+    Anchors = [akLeft, akBottom]
+    Caption = 'Ok'
+    Default = True
+    ModalResult = 1
+    TabOrder = 2
+  end
+  object CancelB: TButton
+    Tag = 2
+    Left = 206
+    Height = 25
+    Top = 338
+    Width = 75
+    Anchors = [akLeft, akBottom]
+    Cancel = True
+    Caption = 'Cancel'
+    ModalResult = 2
+    TabOrder = 3
+  end
+  object GroupPageRange: TGroupBox
+    Tag = 7
+    Left = 4
+    Height = 139
+    Top = 8
+    Width = 280
+    Caption = 'Page range'
+    ClientHeight = 121
+    ClientWidth = 276
+    TabOrder = 0
+    object DescrL: TLabel
+      Tag = 9
+      Left = 12
+      Height = 31
+      Top = 82
+      Width = 249
+      AutoSize = False
+      Caption = 'Enter page numbers...'
+      ParentColor = False
+      WordWrap = True
+    end
+    object AllRB: TRadioButton
+      Tag = 3
+      Left = 12
+      Height = 19
+      Top = 20
+      Width = 31
+      HelpContext = 108
+      Caption = 'All'
+      Checked = True
+      TabOrder = 0
+      TabStop = True
+    end
+    object CurPageRB: TRadioButton
+      Tag = 4
+      Left = 12
+      Height = 19
+      Top = 40
+      Width = 84
+      HelpContext = 118
+      Caption = 'Current page'
+      TabOrder = 1
+    end
+    object PageNumbersRB: TRadioButton
+      Tag = 5
+      Left = 12
+      Height = 19
+      Top = 59
+      Width = 49
+      HelpContext = 124
+      Caption = 'Pages'
+      TabOrder = 2
+    end
+    object PageNumbersE: TEdit
+      Left = 92
+      Height = 21
+      Top = 58
+      Width = 177
+      HelpContext = 133
+      OnChange = PageNumbersEChange
+      OnKeyPress = PageNumbersEKeyPress
+      TabOrder = 3
+    end
+  end
+  object gbOptions: TGroupBox
+    Tag = 9153
+    Left = 4
+    Height = 64
+    Top = 270
+    Width = 280
+    Anchors = [akLeft, akBottom]
+    Caption = 'Settings'
+    ClientHeight = 46
+    ClientWidth = 276
+    TabOrder = 1
+    object OpenCB: TCheckBox
+      Tag = 8706
+      Left = 12
+      Height = 19
+      Top = 16
+      Width = 108
+      Caption = 'Open after export'
+      TabOrder = 0
+    end
+  end
+  object GroupQuality: TGroupBox
+    Tag = 8
+    Left = 4
+    Height = 124
+    Top = 144
+    Width = 280
+    Caption = ' Export settings '
+    ClientHeight = 106
+    ClientWidth = 276
+    TabOrder = 4
+    object PicturesL: TLabel
+      Left = 12
+      Height = 13
+      Top = 84
+      Width = 73
+      AutoSize = False
+      Caption = 'Pictures'
+      ParentColor = False
+    end
+    object StylesCB: TCheckBox
+      Tag = 8202
+      Left = 12
+      Height = 19
+      Top = 20
+      Width = 49
+      Caption = 'Styles'
+      Checked = True
+      State = cbChecked
+      TabOrder = 1
+    end
+    object UnifiedPicturesCB: TCheckBox
+      Tag = 9512
+      Left = 12
+      Height = 19
+      Top = 40
+      Width = 94
+      Caption = 'Unified Pictures'
+      Checked = True
+      State = cbChecked
+      TabOrder = 0
+    end
+    object PicturesCB: TCheckBox
+      Tag = 8002
+      Left = 144
+      Height = 19
+      Top = 20
+      Width = 58
+      Caption = 'Pictures'
+      Checked = True
+      State = cbChecked
+      TabOrder = 2
+    end
+    object MultipageCB: TCheckBox
+      Tag = 8207
+      Left = 144
+      Height = 19
+      Top = 40
+      Width = 66
+      Caption = 'Multipage'
+      TabOrder = 3
+    end
+    object PFormatCB: TComboBox
+      Left = 91
+      Height = 21
+      Top = 80
+      Width = 181
+      ItemHeight = 13
+      ItemIndex = 0
+      Items.Strings = (
+        'PNG'
+        'BMP'
+        'JPEG'
+      )
+      TabOrder = 4
+      Text = 'PNG'
+    end
+    object FormattedCB: TCheckBox
+      Tag = 9513
+      Left = 12
+      Height = 19
+      Top = 60
+      Width = 70
+      Caption = 'Formatted'
+      TabOrder = 5
+    end
+  end
+  object sd: TSaveDialog
+    left = 144
+    top = 16
+  end
+end

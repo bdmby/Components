@@ -1,0 +1,183 @@
+{*******************************************************}
+{                                                       }
+{                       EhLib v8.2                      }
+{         TCalculatorEh, TPopupCalculatorEh             }
+{                     (Build 8.2.03)                    }
+{                                                       }
+{      Copyright (c) 2002-2013 by Dmitry V. Bolshakov   }
+{                                                       }
+{*******************************************************}
+
+{$I EhLib.Inc}
+
+unit CalculatorEh;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+{$IFDEF CIL}
+  EhLibVCLNET,
+{$ELSE}
+  {$IFDEF FPC}
+  EhLibLCL, LMessages, LCLType,
+  {$ELSE}
+  EhLibVCL,
+  {$ENDIF}
+{$ENDIF}
+{$IFDEF EH_LIB_6} Variants, {$ENDIF}
+  StdCtrls, ExtCtrls, Buttons, Math, ClipBrd, ToolCtrlsEh;
+
+const
+  DefCalcPrecision = 15;
+
+type
+  TCalcStateEh = (csFirstEh, csValidEh, csErrorEh);
+
+{ TCalculatorEh }
+
+  TCalculatorEh = class(TCustomControlEh)
+    Panel1: TPanel;
+    SpeedButton1: TSpeedButtonEh;
+    SpeedButton2: TSpeedButtonEh;
+    SpeedButton3: TSpeedButtonEh;
+    SpeedButton4: TSpeedButtonEh;
+    SpeedButton5: TSpeedButtonEh;
+    SpeedButton6: TSpeedButtonEh;
+    SpeedButton7: TSpeedButtonEh;
+    SpeedButton8: TSpeedButtonEh;
+    SpeedButton9: TSpeedButtonEh;
+    SpeedButton10: TSpeedButtonEh;
+    SpeedButton11: TSpeedButtonEh;
+    SpeedButton12: TSpeedButtonEh;
+    SpeedButton13: TSpeedButtonEh;
+    SpeedButton14: TSpeedButtonEh;
+    SpeedButton15: TSpeedButtonEh;
+    SpeedButton16: TSpeedButtonEh;
+    SpeedButton18: TSpeedButtonEh;
+    SpeedButton19: TSpeedButtonEh;
+    SpeedButton20: TSpeedButtonEh;
+    SpeedButton22: TSpeedButtonEh;
+    SpeedButton23: TSpeedButtonEh;
+    SpeedButton24: TSpeedButtonEh;
+    spEqual: TSpeedButtonEh;
+    TextBox: TLabel;
+    procedure SpeedButtonClick(Sender: TObject);
+  private
+    FBorderStyle: TBorderStyle;
+    FClientHeight: Integer;
+    FClientWidth: Integer;
+    FOperand: Extended;
+    FOperator: Char;
+    FPixelsPerInch: Integer;
+    FStatus: TCalcStateEh;
+    FTextHeight: Integer;
+    function GetDisplayText: String;
+    function GetDisplayValue: Extended;
+    function GetPixelsPerInch: Integer;
+    procedure CheckFirst;
+    procedure Clear;
+    procedure Error;
+    procedure ReadTextHeight(Reader: TReader);
+    {$IFDEF FPC}
+    procedure SetBorderStyle(const Value: TBorderStyle); reintroduce;
+    {$ELSE}
+    procedure SetBorderStyle(const Value: TBorderStyle);
+    {$ENDIF}
+    procedure SetClientHeight(Value: Integer);
+    procedure SetClientWidth(Value: Integer);
+    procedure SetDisplayText(const Value: String);
+    procedure SetDisplayValue(const Value: Extended);
+    procedure SetOldCreateOrder(const Value: Boolean);
+    procedure SetPixelsPerInch(const Value: Integer);
+    procedure UpdateEqualButton;
+    procedure CMBiDiModeChanged(var Message: TMessage); message CM_BIDIMODECHANGED;
+  protected
+    function CanAutoSize(var NewWidth, NewHeight: Integer): Boolean; override;
+    function DoMouseWheelDown(Shift: TShiftState; MousePos: TPoint): Boolean; override;
+    function DoMouseWheelUp(Shift: TShiftState; MousePos: TPoint): Boolean; override;
+    function GetBorderSize: Integer; virtual;
+    function GetTextHeight: Integer;
+    procedure CreateParams(var Params: TCreateParams); override;
+    procedure DefineProperties(Filer: TFiler); override;
+    procedure KeyPress(var Key: Char); override;
+    procedure KeyDown(var Key: Word; Shift: TShiftState); override;
+    procedure ReadState(Reader: TReader); override;
+  public
+    constructor Create(AOwner: TComponent); override;
+    procedure DoCopy;
+    procedure Paste;
+    procedure ProcessKey(Key: Char); virtual;
+    {$IFDEF FPC}
+    function Ctl3D: Boolean;
+    {$ELSE}
+    {$ENDIF}
+    property DisplayText: String read GetDisplayText write SetDisplayText;
+    property DisplayValue: Extended read GetDisplayValue write SetDisplayValue;
+  published
+    property BorderStyle: TBorderStyle read FBorderStyle write SetBorderStyle;
+    property ClientHeight write SetClientHeight;
+    property ClientWidth write SetClientWidth;
+    property Color;
+    property Font;
+    property OldCreateOrder: Boolean write SetOldCreateOrder;
+    property PixelsPerInch: Integer read GetPixelsPerInch write SetPixelsPerInch stored False;
+  end;
+
+{ IPopupCalculatorEh }
+
+  IPopupCalculatorEh = interface
+    ['{697F81AD-0E0F-4A4A-A016-A713620660DE}']
+    function GetEnterCanClose: Boolean;
+    function GetFlat: Boolean;
+    function GetValue: Variant;
+    procedure SetFlat(const Value: Boolean);
+    procedure SetValue(const Value: Variant);
+    property Value: Variant read GetValue write SetValue;
+    property Flat: Boolean read GetFlat write SetFlat;
+    property EnterCanClose: Boolean read GetEnterCanClose;
+  end;
+
+{ TPopupCalculatorEh }
+
+  TPopupCalculatorEh = class(TCalculatorEh, IPopupCalculatorEh{$IFNDEF CIL}, IUnknown {$ENDIF})
+  private
+    FBorderWidth: Integer;
+    FFlat: Boolean;
+    procedure CMCloseUpEh(var Message: TMessage); message CM_CLOSEUPEH;
+    {$IFDEF FPC}
+    {$ELSE}
+    procedure CMCtl3DChanged(var Message: TMessage); message CM_CTL3DCHANGED;
+    {$ENDIF}
+    procedure CMWantSpecialKey(var Message: TCMWantSpecialKey); message CM_WANTSPECIALKEY;
+    procedure WMGetDlgCode(var Message: TWMGetDlgCode); message WM_GETDLGCODE;
+    procedure WMMouseActivate(var Message: TWMMouseActivate); message WM_MOUSEACTIVATE;
+    procedure WMNCCalcSize(var Message: TWMNCCalcSize); message WM_NCCALCSIZE;
+    procedure WMNCPaint(var Message: TWMNCPaint); message WM_NCPAINT;
+  protected
+    {IPopupCalculatorEh}
+    function GetEnterCanClose: Boolean;
+    function GetFlat: Boolean;
+    function GetValue: Variant;
+    procedure SetFlat(const Value: Boolean);
+    procedure SetValue(const Value: Variant);
+  protected
+    function CanAutoSize(var NewWidth, NewHeight: Integer): Boolean; override;
+    procedure CreateParams(var Params: TCreateParams); override;
+    procedure DrawBorder; virtual;
+    procedure UpdateBorderWidth;
+    procedure KeyDown(var Key: Word; Shift: TShiftState); override;
+  public
+    constructor Create(AOwner: TComponent); override;
+    function CanFocus: Boolean; {$IFDEF EH_LIB_5} override; {$ENDIF}
+    procedure ProcessKey(Key: Char); override;
+    {$IFDEF FPC}
+    {$ELSE}
+    property Ctl3D;
+    {$ENDIF}
+    property Flat: Boolean read GetFlat write SetFlat default True;
+  end;
+
+procedure Register;
+
+implementation

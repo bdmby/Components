@@ -1,0 +1,55 @@
+// Package file for Delphi 2006
+
+package frxcs10;
+
+{$ALIGN ON}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $00400000}
+{$RUNONLY}
+{$IMPLICITBUILD OFF}
+
+requires
+  VCL,
+  frx10,
+  frxe10;
+
+contains
+  { core files }
+  frxServer in 'frxServer.pas',
+  frxServerClient in 'frxServerClient.pas',
+  frxServerConfig in 'frxServerConfig.pas',
+  frxServerFormControls in 'frxServerFormControls.pas',
+  frxServerForms in 'frxServerForms.pas',
+  frxServerLog in 'frxServerLog.pas',
+  frxServerReports in 'frxServerReports.pas',
+  frxServerSessionManager in 'frxServerSessionManager.pas',
+  frxUsers in 'frxUsers.pas',
+  frxServerSSI in 'frxServerSSI.pas',
+  frxServerStat in 'frxServerStat.pas',
+  frxServerUtils in 'frxServerUtils.pas',
+  frxHTTPClient in 'frxHTTPClient.pas',
+  frxCGIClient in 'frxCGIClient.pas',
+  frxServerCache in 'frxServerCache.pas',
+  frxServerReportsList in 'frxServerReportsList.pas',
+  frxServerTemplates in 'frxServerTemplates.pas',
+  frxServerVariables in 'frxServerVariables.pas',
+  frxServerPrinter in 'frxServerPrinter.pas';
+end.

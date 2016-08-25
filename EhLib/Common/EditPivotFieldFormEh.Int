@@ -1,0 +1,49 @@
+{*******************************************************}
+{                                                       }
+{                        EhLib v8.2                     }
+{                                                       }
+{            PivotField Sum function Edit Form          }
+{                      Build 8.2.002                    }
+{                                                       }
+{   Copyright (c) 2014-2014 by Dmitry V. Bolshakov      }
+{                                                       }
+{*******************************************************}
+
+unit EditPivotFieldFormEh;
+
+{$I EhLib.Inc}
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  {$IFDEF EH_LIB_17} System.UITypes, {$ENDIF}
+  {$IFDEF FPC}
+  MaskEdit,
+  {$ELSE}
+  Mask, 
+  {$ENDIF}
+  Dialogs, StdCtrls,
+  DBCtrlsEh, PivotGridsEh;
+
+type
+  TfEditPivotField = class(TForm)
+    lFieldName: TLabel;
+    fAggrFunc: TLabel;
+    ListBox1: TListBox;
+    bOk: TButton;
+    bCancel: TButton;
+    lDisplayFormat: TLabel;
+    cbDisplayFormat: TDBComboBoxEh;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  fEditPivotField: TfEditPivotField;
+
+function EditPivotField(PivotFieldValueInfo: TPivotFieldValueInfoEh): Boolean;
+
+implementation

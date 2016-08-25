@@ -1,0 +1,119 @@
+{*******************************************************}
+{                                                       }
+{                     EhLib v8.2                        }
+{                                                       }
+{         TDBXDesignDataBaseEh (Build 8.2.02)           }
+{                                                       }
+{     Copyright (c) 2004-2013 by Dmitry V. Bolshakov    }
+{                                                       }
+{*******************************************************}
+
+unit DBXDataDriverDesignEh;
+
+{$I EHLIB.INC}
+
+interface
+
+{$IFDEF CIL}
+{$R DBXDataDriverEh.TDBXDataDriverEh.bmp}
+{$ENDIF}
+
+uses Windows, SysUtils, Classes, Controls, DB,
+{$IFDEF EH_LIB_6} Variants, {$ENDIF}
+{$IFDEF EH_LIB_5} Contnrs, {$ENDIF}
+  ToolCtrlsEh, DBCommon, MemTableDataEh, DataDriverEh, SqlExpr,
+  SQLDriverEditEh, DBXDataDriverEh, ComCtrls, MemTableEh, SQLConnEdEh,
+//design-time
+{$IFDEF DESIGNTIME}
+{$IFDEF CIL}
+  Borland.Vcl.Design.DBConnEd,
+  Borland.Vcl.Design.ComponentDesigner,
+{$ELSE}
+{$IFDEF EH_LIB_12}
+  DBDrvEd,
+{$ELSE}
+  DBConnEd,
+{$ENDIF}
+  ComponentDesigner,
+{$ENDIF}
+{$ENDIF}
+
+{$IFDEF EH_LIB_11}
+{$IFDEF CIL}
+//   DBXCommon,
+{$ELSE}
+   DBXCommon,
+{$ENDIF}
+{$ENDIF}
+  UpdateSQLEditEh, Forms, Dialogs;
+
+type
+
+{ IDBXDesignDataBaseEh }
+
+  IDBXDesignDataBaseEh = interface
+  ['{9E53BD33-4E5E-414F-9E4A-4980A8F7637A}']
+    function GetSQLConnection: TSQLConnection;
+  end;
+
+{ TDBXDesignDataBaseEh }
+
+  TDBXDesignDataBaseEh = class(TDesignDataBaseEh, IDBXDesignDataBaseEh)
+  private
+    FTablesMT: TMemTableEh;
+    FColumnsMT: TMemTableEh;
+    FSQLConnection: TSQLConnection;
+    FTreeNodeMan: TCustomDBService;
+    FDBService: TCustomDBService;
+    FApplicationConnection: TSQLConnection;
+    FSpecParamsServiceClass: TCustomDBServiceClass;
+    procedure SetApplicationConnection(const Value: TSQLConnection);
+  protected
+    procedure Notification(AComponent: TComponent; Operation: TOperation); override;
+    function GetConnected: Boolean; override;
+    procedure SetConnected(const Value: Boolean); override;
+  public
+    constructor Create(IsPublicDataBase: Boolean; AConProvider: TComponent); override;
+//    constructor Create;
+    destructor Destroy; override;
+    function GetEngineName: String; override;
+    function GetDBServiceClass: TCustomDBServiceClass;
+    function GetServerTypeName: String; override;
+    function CreateDesignCopy(RTDataDriver: TCustomSQLDataDriverEh): TCustomSQLDataDriverEh; override;
+    function DesignDataBaseConnetionEqual(DataDriver: TCustomSQLDataDriverEh): Boolean; override;
+    function Execute(Command: TCustomSQLCommandEh; var Cursor: TDataSet; var FreeOnEof: Boolean): Integer; override;
+    function GetSQLConnection: TSQLConnection;
+    function GetConProvider: TDBXConnectionProviderEh;
+    function BuildUpdates(DataDriver: TCustomSQLDataDriverEh): Boolean; override;
+    function CreateReader(SQL: String; FParams: TParamsArr): TDataSet; override;
+    function BuildObjectTree(List: TList): Boolean; override;
+    function BuildInterbaseObjectTree2(List: TList): Boolean;
+    function BuildOracleObjectTree(List: TList): Boolean;
+    function SupportCustomSQLDataDriver: Boolean; override;
+    function GetFieldList(const TableName: string; DataSet: TDataSet): Boolean; override;
+    function GetSpecParamsList: String; override;
+    function CanFormSpecParamsList(var StrReasonOfInable: String): Boolean; override;
+    procedure EditDatabaseParams; override;
+    procedure SetServerTypeAsServerSpecOperationsClass(const Value: TServerSpecOperationsEhClass); override;
+    property ApplicationConnection: TSQLConnection read FApplicationConnection write SetApplicationConnection;
+  end;
+
+  TDBXAccessEngineEh = class(TAccessEngineEh)
+    function AccessEngineName: String; override;
+//    function CreateDesignDataBase(DataDriver: TCustomSQLDataDriverEh): TDesignDataBaseEh; override;
+    function CreateDesignDataBase(DataDriver: TCustomSQLDataDriverEh;
+      DBServiceClass: TCustomDBServiceClass; DataBaseName: String): TDesignDataBaseEh; override;
+  end;
+
+{ TDBXConnectionProviderDesignSerivceEh }
+
+  TDBXConnectionProviderDesignSerivceEh = class(TConnectionProviderDesignSerivceEh)
+    function EditDesignData(ConnectionProvider: TConnectionProviderEh): Boolean; override;
+    function CreateDesignDataBase(ConnectionProvider: TComponent): TComponent; override;
+  end;
+
+procedure RegisterDBXAccessEngines;
+
+procedure Register;
+
+implementation

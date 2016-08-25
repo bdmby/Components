@@ -1,0 +1,17 @@
+{*******************************************************}
+{                                                       }
+{                       EhLib v8.2                      }
+{                    EhLibSplash form                   }
+{                      Build 8.2.001                    }
+{                                                       }
+{     Copyright (c) 2013-15 by Dmitry V. Bolshakov      }
+{                                                       }
+{*******************************************************}
+
+unit EhLibSplash;
+
+{$I EhLib.Inc}
+
+interface
+
+implementation

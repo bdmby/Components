@@ -1,0 +1,468 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{9B3F8E2A-275E-42F8-9F3F-E0E51367F1F6}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Rx\units\packages_D10_1\RtmRxCtl240.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Rx\units\packages_D10_1\DclRxCtl240.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Rx\units\packages_D10_1\RtmRxDB240.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Rx\units\packages_D10_1\DclRxDB240.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="FastReport\LibD24\fs24.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="FastReport\LibD24\fsDB24.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="FastReport\LibD24\fsADO24.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="FastReport\LibD24\fsIBX24.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="FastReport\LibD24\fsTee24.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="FastReport\LibD24\frx24.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="FastReport\LibD24\frxDB24.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="FastReport\LibD24\frxADO24.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="FastReport\LibD24\frxIBX24.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="FastReport\LibD24\frxDBX24.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="FastReport\LibD24\frxTee24.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="FastReport\LibD24\frxe24.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="FastReport\LibD24\dclfs24.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="FastReport\LibD24\dclfsDB24.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="FastReport\LibD24\dclfsADO24.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="FastReport\LibD24\dclfsIBX24.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="FastReport\LibD24\dclfsTee24.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="FastReport\LibD24\dclfrx24.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="FastReport\LibD24\dclfrxDB24.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="FastReport\LibD24\dclfrxADO24.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="FastReport\LibD24\dclfrxIBX24.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="FastReport\LibD24\dclfrxDBX24.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="FastReport\LibD24\dclfrxTee24.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="FastReport\LibD24\dclfrxe24.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="SCFRPackage\SCFRPackage.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="EhLib\RADStudioXE10_1\EhLib240.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="EhLib\RADStudioXE10_1\EhLibADODataDrivers240.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="EhLib\RADStudioXE10_1\EhLibDBXDataDrivers240.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="EhLib\RADStudioXE10_1\EhLibIBXDataDrivers240.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="EhLib\RADStudioXE10_1\DclEhLib240.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="EhLib\RADStudioXE10_1\DclEhLibADODataDrivers240.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="EhLib\RADStudioXE10_1\DclEhLibDBXDataDrivers240.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="EhLib\RADStudioXE10_1\DclEhLibIBXDataDrivers240.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="RtmRxCtl240">
+        <MSBuild Projects="Rx\units\packages_D10_1\RtmRxCtl240.dproj"/>
+    </Target>
+    <Target Name="RtmRxCtl240:Clean">
+        <MSBuild Projects="Rx\units\packages_D10_1\RtmRxCtl240.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="RtmRxCtl240:Make">
+        <MSBuild Projects="Rx\units\packages_D10_1\RtmRxCtl240.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="DclRxCtl240">
+        <MSBuild Projects="Rx\units\packages_D10_1\DclRxCtl240.dproj"/>
+    </Target>
+    <Target Name="DclRxCtl240:Clean">
+        <MSBuild Projects="Rx\units\packages_D10_1\DclRxCtl240.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="DclRxCtl240:Make">
+        <MSBuild Projects="Rx\units\packages_D10_1\DclRxCtl240.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="RtmRxDB240">
+        <MSBuild Projects="Rx\units\packages_D10_1\RtmRxDB240.dproj"/>
+    </Target>
+    <Target Name="RtmRxDB240:Clean">
+        <MSBuild Projects="Rx\units\packages_D10_1\RtmRxDB240.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="RtmRxDB240:Make">
+        <MSBuild Projects="Rx\units\packages_D10_1\RtmRxDB240.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="DclRxDB240">
+        <MSBuild Projects="Rx\units\packages_D10_1\DclRxDB240.dproj"/>
+    </Target>
+    <Target Name="DclRxDB240:Clean">
+        <MSBuild Projects="Rx\units\packages_D10_1\DclRxDB240.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="DclRxDB240:Make">
+        <MSBuild Projects="Rx\units\packages_D10_1\DclRxDB240.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="fs24">
+        <MSBuild Projects="FastReport\LibD24\fs24.dproj"/>
+    </Target>
+    <Target Name="fs24:Clean">
+        <MSBuild Projects="FastReport\LibD24\fs24.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="fs24:Make">
+        <MSBuild Projects="FastReport\LibD24\fs24.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="fsDB24">
+        <MSBuild Projects="FastReport\LibD24\fsDB24.dproj"/>
+    </Target>
+    <Target Name="fsDB24:Clean">
+        <MSBuild Projects="FastReport\LibD24\fsDB24.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="fsDB24:Make">
+        <MSBuild Projects="FastReport\LibD24\fsDB24.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="fsADO24">
+        <MSBuild Projects="FastReport\LibD24\fsADO24.dproj"/>
+    </Target>
+    <Target Name="fsADO24:Clean">
+        <MSBuild Projects="FastReport\LibD24\fsADO24.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="fsADO24:Make">
+        <MSBuild Projects="FastReport\LibD24\fsADO24.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="fsIBX24">
+        <MSBuild Projects="FastReport\LibD24\fsIBX24.dproj"/>
+    </Target>
+    <Target Name="fsIBX24:Clean">
+        <MSBuild Projects="FastReport\LibD24\fsIBX24.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="fsIBX24:Make">
+        <MSBuild Projects="FastReport\LibD24\fsIBX24.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="fsTee24">
+        <MSBuild Projects="FastReport\LibD24\fsTee24.dproj"/>
+    </Target>
+    <Target Name="fsTee24:Clean">
+        <MSBuild Projects="FastReport\LibD24\fsTee24.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="fsTee24:Make">
+        <MSBuild Projects="FastReport\LibD24\fsTee24.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="frx24">
+        <MSBuild Projects="FastReport\LibD24\frx24.dproj"/>
+    </Target>
+    <Target Name="frx24:Clean">
+        <MSBuild Projects="FastReport\LibD24\frx24.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="frx24:Make">
+        <MSBuild Projects="FastReport\LibD24\frx24.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="frxDB24">
+        <MSBuild Projects="FastReport\LibD24\frxDB24.dproj"/>
+    </Target>
+    <Target Name="frxDB24:Clean">
+        <MSBuild Projects="FastReport\LibD24\frxDB24.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="frxDB24:Make">
+        <MSBuild Projects="FastReport\LibD24\frxDB24.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="frxADO24">
+        <MSBuild Projects="FastReport\LibD24\frxADO24.dproj"/>
+    </Target>
+    <Target Name="frxADO24:Clean">
+        <MSBuild Projects="FastReport\LibD24\frxADO24.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="frxADO24:Make">
+        <MSBuild Projects="FastReport\LibD24\frxADO24.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="frxIBX24">
+        <MSBuild Projects="FastReport\LibD24\frxIBX24.dproj"/>
+    </Target>
+    <Target Name="frxIBX24:Clean">
+        <MSBuild Projects="FastReport\LibD24\frxIBX24.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="frxIBX24:Make">
+        <MSBuild Projects="FastReport\LibD24\frxIBX24.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="frxDBX24">
+        <MSBuild Projects="FastReport\LibD24\frxDBX24.dproj"/>
+    </Target>
+    <Target Name="frxDBX24:Clean">
+        <MSBuild Projects="FastReport\LibD24\frxDBX24.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="frxDBX24:Make">
+        <MSBuild Projects="FastReport\LibD24\frxDBX24.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="frxTee24">
+        <MSBuild Projects="FastReport\LibD24\frxTee24.dproj"/>
+    </Target>
+    <Target Name="frxTee24:Clean">
+        <MSBuild Projects="FastReport\LibD24\frxTee24.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="frxTee24:Make">
+        <MSBuild Projects="FastReport\LibD24\frxTee24.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="frxe24">
+        <MSBuild Projects="FastReport\LibD24\frxe24.dproj"/>
+    </Target>
+    <Target Name="frxe24:Clean">
+        <MSBuild Projects="FastReport\LibD24\frxe24.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="frxe24:Make">
+        <MSBuild Projects="FastReport\LibD24\frxe24.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dclfs24">
+        <MSBuild Projects="FastReport\LibD24\dclfs24.dproj"/>
+    </Target>
+    <Target Name="dclfs24:Clean">
+        <MSBuild Projects="FastReport\LibD24\dclfs24.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dclfs24:Make">
+        <MSBuild Projects="FastReport\LibD24\dclfs24.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dclfsDB24">
+        <MSBuild Projects="FastReport\LibD24\dclfsDB24.dproj"/>
+    </Target>
+    <Target Name="dclfsDB24:Clean">
+        <MSBuild Projects="FastReport\LibD24\dclfsDB24.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dclfsDB24:Make">
+        <MSBuild Projects="FastReport\LibD24\dclfsDB24.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dclfsADO24">
+        <MSBuild Projects="FastReport\LibD24\dclfsADO24.dproj"/>
+    </Target>
+    <Target Name="dclfsADO24:Clean">
+        <MSBuild Projects="FastReport\LibD24\dclfsADO24.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dclfsADO24:Make">
+        <MSBuild Projects="FastReport\LibD24\dclfsADO24.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dclfsIBX24">
+        <MSBuild Projects="FastReport\LibD24\dclfsIBX24.dproj"/>
+    </Target>
+    <Target Name="dclfsIBX24:Clean">
+        <MSBuild Projects="FastReport\LibD24\dclfsIBX24.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dclfsIBX24:Make">
+        <MSBuild Projects="FastReport\LibD24\dclfsIBX24.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dclfsTee24">
+        <MSBuild Projects="FastReport\LibD24\dclfsTee24.dproj"/>
+    </Target>
+    <Target Name="dclfsTee24:Clean">
+        <MSBuild Projects="FastReport\LibD24\dclfsTee24.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dclfsTee24:Make">
+        <MSBuild Projects="FastReport\LibD24\dclfsTee24.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dclfrx24">
+        <MSBuild Projects="FastReport\LibD24\dclfrx24.dproj"/>
+    </Target>
+    <Target Name="dclfrx24:Clean">
+        <MSBuild Projects="FastReport\LibD24\dclfrx24.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dclfrx24:Make">
+        <MSBuild Projects="FastReport\LibD24\dclfrx24.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dclfrxDB24">
+        <MSBuild Projects="FastReport\LibD24\dclfrxDB24.dproj"/>
+    </Target>
+    <Target Name="dclfrxDB24:Clean">
+        <MSBuild Projects="FastReport\LibD24\dclfrxDB24.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dclfrxDB24:Make">
+        <MSBuild Projects="FastReport\LibD24\dclfrxDB24.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dclfrxADO24">
+        <MSBuild Projects="FastReport\LibD24\dclfrxADO24.dproj"/>
+    </Target>
+    <Target Name="dclfrxADO24:Clean">
+        <MSBuild Projects="FastReport\LibD24\dclfrxADO24.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dclfrxADO24:Make">
+        <MSBuild Projects="FastReport\LibD24\dclfrxADO24.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dclfrxIBX24">
+        <MSBuild Projects="FastReport\LibD24\dclfrxIBX24.dproj"/>
+    </Target>
+    <Target Name="dclfrxIBX24:Clean">
+        <MSBuild Projects="FastReport\LibD24\dclfrxIBX24.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dclfrxIBX24:Make">
+        <MSBuild Projects="FastReport\LibD24\dclfrxIBX24.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dclfrxDBX24">
+        <MSBuild Projects="FastReport\LibD24\dclfrxDBX24.dproj"/>
+    </Target>
+    <Target Name="dclfrxDBX24:Clean">
+        <MSBuild Projects="FastReport\LibD24\dclfrxDBX24.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dclfrxDBX24:Make">
+        <MSBuild Projects="FastReport\LibD24\dclfrxDBX24.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dclfrxTee24">
+        <MSBuild Projects="FastReport\LibD24\dclfrxTee24.dproj"/>
+    </Target>
+    <Target Name="dclfrxTee24:Clean">
+        <MSBuild Projects="FastReport\LibD24\dclfrxTee24.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dclfrxTee24:Make">
+        <MSBuild Projects="FastReport\LibD24\dclfrxTee24.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="dclfrxe24">
+        <MSBuild Projects="FastReport\LibD24\dclfrxe24.dproj"/>
+    </Target>
+    <Target Name="dclfrxe24:Clean">
+        <MSBuild Projects="FastReport\LibD24\dclfrxe24.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dclfrxe24:Make">
+        <MSBuild Projects="FastReport\LibD24\dclfrxe24.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="SCFRPackage">
+        <MSBuild Projects="SCFRPackage\SCFRPackage.dproj"/>
+    </Target>
+    <Target Name="SCFRPackage:Clean">
+        <MSBuild Projects="SCFRPackage\SCFRPackage.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="SCFRPackage:Make">
+        <MSBuild Projects="SCFRPackage\SCFRPackage.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="EhLib240">
+        <MSBuild Projects="EhLib\RADStudioXE10_1\EhLib240.dproj"/>
+    </Target>
+    <Target Name="EhLib240:Clean">
+        <MSBuild Projects="EhLib\RADStudioXE10_1\EhLib240.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="EhLib240:Make">
+        <MSBuild Projects="EhLib\RADStudioXE10_1\EhLib240.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="EhLibADODataDrivers240">
+        <MSBuild Projects="EhLib\RADStudioXE10_1\EhLibADODataDrivers240.dproj"/>
+    </Target>
+    <Target Name="EhLibADODataDrivers240:Clean">
+        <MSBuild Projects="EhLib\RADStudioXE10_1\EhLibADODataDrivers240.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="EhLibADODataDrivers240:Make">
+        <MSBuild Projects="EhLib\RADStudioXE10_1\EhLibADODataDrivers240.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="EhLibDBXDataDrivers240">
+        <MSBuild Projects="EhLib\RADStudioXE10_1\EhLibDBXDataDrivers240.dproj"/>
+    </Target>
+    <Target Name="EhLibDBXDataDrivers240:Clean">
+        <MSBuild Projects="EhLib\RADStudioXE10_1\EhLibDBXDataDrivers240.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="EhLibDBXDataDrivers240:Make">
+        <MSBuild Projects="EhLib\RADStudioXE10_1\EhLibDBXDataDrivers240.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="EhLibIBXDataDrivers240">
+        <MSBuild Projects="EhLib\RADStudioXE10_1\EhLibIBXDataDrivers240.dproj"/>
+    </Target>
+    <Target Name="EhLibIBXDataDrivers240:Clean">
+        <MSBuild Projects="EhLib\RADStudioXE10_1\EhLibIBXDataDrivers240.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="EhLibIBXDataDrivers240:Make">
+        <MSBuild Projects="EhLib\RADStudioXE10_1\EhLibIBXDataDrivers240.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="DclEhLib240">
+        <MSBuild Projects="EhLib\RADStudioXE10_1\DclEhLib240.dproj"/>
+    </Target>
+    <Target Name="DclEhLib240:Clean">
+        <MSBuild Projects="EhLib\RADStudioXE10_1\DclEhLib240.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="DclEhLib240:Make">
+        <MSBuild Projects="EhLib\RADStudioXE10_1\DclEhLib240.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="DclEhLibADODataDrivers240">
+        <MSBuild Projects="EhLib\RADStudioXE10_1\DclEhLibADODataDrivers240.dproj"/>
+    </Target>
+    <Target Name="DclEhLibADODataDrivers240:Clean">
+        <MSBuild Projects="EhLib\RADStudioXE10_1\DclEhLibADODataDrivers240.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="DclEhLibADODataDrivers240:Make">
+        <MSBuild Projects="EhLib\RADStudioXE10_1\DclEhLibADODataDrivers240.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="DclEhLibDBXDataDrivers240">
+        <MSBuild Projects="EhLib\RADStudioXE10_1\DclEhLibDBXDataDrivers240.dproj"/>
+    </Target>
+    <Target Name="DclEhLibDBXDataDrivers240:Clean">
+        <MSBuild Projects="EhLib\RADStudioXE10_1\DclEhLibDBXDataDrivers240.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="DclEhLibDBXDataDrivers240:Make">
+        <MSBuild Projects="EhLib\RADStudioXE10_1\DclEhLibDBXDataDrivers240.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="DclEhLibIBXDataDrivers240">
+        <MSBuild Projects="EhLib\RADStudioXE10_1\DclEhLibIBXDataDrivers240.dproj"/>
+    </Target>
+    <Target Name="DclEhLibIBXDataDrivers240:Clean">
+        <MSBuild Projects="EhLib\RADStudioXE10_1\DclEhLibIBXDataDrivers240.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="DclEhLibIBXDataDrivers240:Make">
+        <MSBuild Projects="EhLib\RADStudioXE10_1\DclEhLibIBXDataDrivers240.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="RtmRxCtl240;DclRxCtl240;RtmRxDB240;DclRxDB240;fs24;fsDB24;fsADO24;fsIBX24;fsTee24;frx24;frxDB24;frxADO24;frxIBX24;frxDBX24;frxTee24;frxe24;dclfs24;dclfsDB24;dclfsADO24;dclfsIBX24;dclfsTee24;dclfrx24;dclfrxDB24;dclfrxADO24;dclfrxIBX24;dclfrxDBX24;dclfrxTee24;dclfrxe24;SCFRPackage;EhLib240;EhLibADODataDrivers240;EhLibDBXDataDrivers240;EhLibIBXDataDrivers240;DclEhLib240;DclEhLibADODataDrivers240;DclEhLibDBXDataDrivers240;DclEhLibIBXDataDrivers240"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="RtmRxCtl240:Clean;DclRxCtl240:Clean;RtmRxDB240:Clean;DclRxDB240:Clean;fs24:Clean;fsDB24:Clean;fsADO24:Clean;fsIBX24:Clean;fsTee24:Clean;frx24:Clean;frxDB24:Clean;frxADO24:Clean;frxIBX24:Clean;frxDBX24:Clean;frxTee24:Clean;frxe24:Clean;dclfs24:Clean;dclfsDB24:Clean;dclfsADO24:Clean;dclfsIBX24:Clean;dclfsTee24:Clean;dclfrx24:Clean;dclfrxDB24:Clean;dclfrxADO24:Clean;dclfrxIBX24:Clean;dclfrxDBX24:Clean;dclfrxTee24:Clean;dclfrxe24:Clean;SCFRPackage:Clean;EhLib240:Clean;EhLibADODataDrivers240:Clean;EhLibDBXDataDrivers240:Clean;EhLibIBXDataDrivers240:Clean;DclEhLib240:Clean;DclEhLibADODataDrivers240:Clean;DclEhLibDBXDataDrivers240:Clean;DclEhLibIBXDataDrivers240:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="RtmRxCtl240:Make;DclRxCtl240:Make;RtmRxDB240:Make;DclRxDB240:Make;fs24:Make;fsDB24:Make;fsADO24:Make;fsIBX24:Make;fsTee24:Make;frx24:Make;frxDB24:Make;frxADO24:Make;frxIBX24:Make;frxDBX24:Make;frxTee24:Make;frxe24:Make;dclfs24:Make;dclfsDB24:Make;dclfsADO24:Make;dclfsIBX24:Make;dclfsTee24:Make;dclfrx24:Make;dclfrxDB24:Make;dclfrxADO24:Make;dclfrxIBX24:Make;dclfrxDBX24:Make;dclfrxTee24:Make;dclfrxe24:Make;SCFRPackage:Make;EhLib240:Make;EhLibADODataDrivers240:Make;EhLibDBXDataDrivers240:Make;EhLibIBXDataDrivers240:Make;DclEhLib240:Make;DclEhLibADODataDrivers240:Make;DclEhLibDBXDataDrivers240:Make;DclEhLibIBXDataDrivers240:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

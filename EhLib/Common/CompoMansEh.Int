@@ -1,0 +1,44 @@
+{*******************************************************}
+{                                                       }
+{                        EhLib v8.2                     }
+{                                                       }
+{                  TCompoManEh component                }
+{                      Build 8.2.001                    }
+{                                                       }
+{    Copyright (c) 2014-2015 by Dmitry V. Bolshakov     }
+{                                                       }
+{*******************************************************}
+
+{$I EhLib.Inc}
+
+unit CompoMansEh;
+
+interface
+
+uses
+  Windows, SysUtils, Classes, Graphics, Dialogs,
+  {$IFDEF EH_LIB_6} Variants, {$ENDIF}
+  Db;
+
+type
+
+{ TCompoManEh }
+
+  TCompoManEh = class(TComponent)
+  private
+  protected
+    FVisibleComponentListPos: TStringList;
+    procedure DefineProperties(Filer: TFiler); override;
+    procedure ReadCompoPoses(Reader: TReader);
+    procedure WriteCompoPoses(Writer: TWriter);
+  public
+    constructor Create(AOwner: TComponent); override;
+    destructor Destroy; override;
+  end;
+
+//  TDesignTimeCompoListDeleteNotificationProcEh = procedure(Sender: TCompoManEh);
+
+//var
+//  DesignTimeCompoListDeleteNotification: TDesignTimeCompoListDeleteNotificationProcEh;
+
+implementation

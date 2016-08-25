@@ -1,0 +1,118 @@
+package Delphi_2007up_LangMan_VCLonly;
+
+{$R *.res}
+{$R 'LangMan.dres'}
+{$DEFINE ENABLE_USER_NOTICE}
+{$INCLUDE LM_Config.inc}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'LangMan - Localization components package (VCL)'}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  vcl,
+  vclx,
+  vclactnband,
+  vclimg,
+  vcljpg,
+{$IFDEF TEECHART}
+  Tee,
+{$ENDIF}
+{$IFDEF D2010}
+  vcltouch,
+{$ENDIF}
+{$IFDEF RIBBONS}
+  vclribbon,
+{$ENDIF}
+  VclSmp,
+  designide,
+{$IFDEF FIREDAC_GUI}
+  FireDAC,
+{$ENDIF}
+{$IFDEF DATABASES}
+  dbrtl,
+  vcldb,
+  vclib,
+ {$IFNDEF NEXTGEN}
+  inetdb,
+ {$ENDIF}
+{$ENDIF}
+{$IFDEF RAVE}
+ {$IF DEFINED(VER230)}
+  Rave100VCL,
+ {$ELSE}
+  {$IF DEFINED(VER220)}
+   Rave90VCL,
+  {$ELSE}
+   {$IF DEFINED(VER210)}
+    Rave77VCL,
+   {$ELSE}
+    {$IF DEFINED(VER200)}
+     Rave76VCL,
+    {$ELSE}
+     Rave75VCL,
+    {$IFEND}
+   {$IFEND}
+  {$IFEND}
+ {$IFEND}
+{$ENDIF}
+{$IFDEF SYNEDIT}
+ {$IF DEFINED(VER270)}
+  SynEdit_R2016,
+ {$ELSEIF DEFINED(VER260)}
+  SynEdit_R2015,
+ {$ELSEIF DEFINED(VER250)}
+  SynEdit_R2014,
+ {$ELSEIF DEFINED(VER240)}
+  SynEdit_R2013,
+ {$ELSEIF DEFINED(VER230)}
+  SynEdit_R2012,
+ {$ELSEIF DEFINED(VER220)}
+  SynEdit_R2011,
+ {$ELSEIF DEFINED(VER210)}
+  SynEdit_R2010,
+ {$ELSEIF DEFINED(VER200)}
+  SynEdit_R2009,
+ {$ELSEIF DEFINED(VER185)}
+  SynEdit_R2007,
+ {$ELSEIF DEFINED(VER180)}
+  SynEdit_R2006,
+ {$ELSE}
+  SynEdit,
+ {$IFEND}
+{$ENDIF}
+  xmlrtl;
+
+contains
+  LangManSys in 'LangManSys.pas',
+  LangManISO in 'LangManISO.pas',
+  LangManCtrls in 'LangManCtrls.pas',
+  LangManCore in 'LangManCore.pas',
+  LangManComp in 'LangManComp.pas',
+  LangManVCLCompat in 'LangManVCLCompat.pas',
+  LangManVCLEditor in 'LangManVCLEditor.pas',
+  LangManDlg in 'LangManDlg.pas',
+  LangManReg in 'LangManReg.pas',
+  LMVCLAdditions in 'LMVCLAdditions.pas';
+
+end.

@@ -1,0 +1,124 @@
+package LangMan_VCL;
+
+{$R *.res}
+{$R 'LangMan.dres'}
+{$DEFINE ENABLE_USER_NOTICE}
+{$INCLUDE LM_Config.inc}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$DESCRIPTION 'LangMan - Localization components package (VCL)'}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  vcl,
+  LangMan_Core,
+{$IFDEF TEECHART}
+  Tee,
+{$ENDIF}
+{$IFDEF WIN32}
+  designide,
+{$ENDIF}
+{$IFDEF D2010}
+  vcltouch,
+{$ENDIF}
+{$IFDEF RIBBONS}
+  vclribbon,
+{$ENDIF}
+  vclactnband,
+  vclx,
+  VclSmp,
+  vclimg
+{$IFDEF DATABASES},
+//  xmlrtl,
+//  dbrtl,
+  vcldb,
+//  inet,
+//  inetdb
+  vclib
+{$ENDIF}
+{$IFDEF RAVE},
+ {$IF DEFINED(VER230)}
+  Rave100VCL
+ {$ELSE}
+  {$IF DEFINED(VER220)}
+   Rave90VCL
+  {$ELSE}
+   {$IF DEFINED(VER210)}
+    Rave77VCL
+   {$ELSE}
+    {$IF DEFINED(VER200)}
+     Rave76VCL
+    {$ELSE}
+     Rave75VCL
+    {$IFEND}
+   {$IFEND}
+  {$IFEND}
+ {$IFEND}
+{$ENDIF}
+{$IFDEF SYNEDIT},
+ {$IF DEFINED(VER310)}
+  SynEdit_R2020
+ {$ELSEIF DEFINED(VER300)}
+  SynEdit_R2019
+ {$ELSEIF DEFINED(VER290)}
+  SynEdit_R2018
+ {$ELSEIF DEFINED(VER280)}
+  SynEdit_R2017
+ {$ELSEIF DEFINED(VER270)}
+  SynEdit_R2016
+ {$ELSEIF DEFINED(VER260)}
+  SynEdit_R2015
+ {$ELSEIF DEFINED(VER250)}
+  SynEdit_R2014
+ {$ELSEIF DEFINED(VER240)}
+  SynEdit_R2013
+ {$ELSEIF DEFINED(VER230)}
+  SynEdit_R2012
+ {$ELSEIF DEFINED(VER220)}
+  SynEdit_R2011
+ {$ELSEIF DEFINED(VER210)}
+  SynEdit_R2010
+ {$ELSEIF DEFINED(VER200)}
+  SynEdit_R2009
+ {$ELSEIF DEFINED(VER185)}
+  SynEdit_R2007
+ {$ELSEIF DEFINED(VER180)}
+  SynEdit_R2006
+ {$ELSE}
+  SynEdit
+ {$IFEND}
+{$ENDIF};
+
+contains
+  LangManComp in 'LangManComp.pas',
+  LangManCtrls in 'LangManCtrls.pas',
+  LangManDlg in 'LangManDlg.pas' {StringsEditor},
+  LangManReg in 'LangManReg.pas',
+  LangManVCLCompat in 'LangManVCLCompat.pas',
+  LangManVCLEditor in 'LangManVCLEditor.pas' {LanguageManager},
+  LMVCLAdditions in 'LMVCLAdditions.pas';
+
+end.

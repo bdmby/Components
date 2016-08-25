@@ -1,0 +1,8 @@
+Compatibility issues between FastReport 5 and FastReport 4:
+
+- v5 uses the same file/package names as v4. You have to uninstall v4 before 
+installing v5.
+
+- v5 uses the same file format, .fr3 and can open v4 files without any problems.
+
+- v5 can read v4 .fp3 files.

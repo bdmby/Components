@@ -1,0 +1,360 @@
+{*******************************************************}
+{                                                       }
+{                        EhLib v8.2                     }
+{                                                       }
+{                CalendarPicker Component               }
+{                      Build 8.2.005                    }
+{                                                       }
+{   Copyright (c) 2014-2015 by Dmitry V. Bolshakov      }
+{                                                       }
+{*******************************************************}
+
+{$I EhLib.Inc}
+
+unit PlannerCalendarPickerEh;
+
+interface
+
+uses
+{$IFDEF EH_LIB_17} System.Generics.Collections, {$ENDIF}
+  Windows, SysUtils, Messages, Classes, Controls, Forms, StdCtrls, TypInfo,
+  DateUtils, ExtCtrls, Buttons, Dialogs,
+  Contnrs, Variants, Types, Themes, UxTheme,
+{$IFDEF EH_LIB_17} System.UITypes, {$ENDIF}
+{$IFDEF CIL}
+  EhLibVCLNET,
+  WinUtils,
+{$ELSE}
+  {$IFDEF FPC}
+  EhLibLCL, LMessages, LCLType,
+  {$ELSE}
+  EhLibVCL,
+  {$ENDIF}
+{$ENDIF}
+  PlannerDataEh, SpreadGridsEh, PlannersEh,
+  GridsEh, ToolCtrlsEh, Graphics;
+
+type
+  TCustomCalendarMonthViewEh = class;
+  TPlannerCalendarPickerEh = class;
+
+{ TCalPickCellEh }
+
+  TCalPickCellEh = class(TSpreadGridCellEh)
+  private
+    FHasPlanEvents: Boolean;
+  public
+    procedure Clear; override;
+    property HasPlanEvents: Boolean read FHasPlanEvents write FHasPlanEvents;
+  end;
+
+  TCalendarMonthPickerButtonStyleEh = (cmpsPriorMonthEh, cmpsNextMonthEh);
+
+{ TCalendarMonthPickerButtonEh }
+
+  TCalendarMonthPickerButtonEh = class(TSpeedButtonEh)
+  private
+    FStyle: TCalendarMonthPickerButtonStyleEh;
+    function GetMonthPicker: TCustomCalendarMonthViewEh;
+    procedure SetStyle(const Value: TCalendarMonthPickerButtonStyleEh);
+
+    procedure CMMouseEnter(var Message: TMessage); message CM_MOUSEENTER;
+    procedure CMMouseLeave(var Message: TMessage); message CM_MOUSELEAVE;
+  protected
+    FMouseInControl: Boolean;
+    procedure Paint; override;
+  public
+    constructor Create(AOwner: TComponent); override;
+    procedure EditButtonDown(ButtonNum: Integer; var AutoRepeat: Boolean); override;
+    procedure MouseDown(Button: TMouseButton; Shift: TShiftState; X, Y: Integer); override;
+
+    property MonthPicker: TCustomCalendarMonthViewEh read GetMonthPicker;
+    property Style: TCalendarMonthPickerButtonStyleEh read FStyle write SetStyle;
+  end;
+
+  TCalendarMonthViewOptionEh = (clvFillTopDatesRowEh, clvFillBottomDatesRowEh,
+    cmvShowPriorMonthButtonEh, cmvShowNextMonthButtonEh);
+  TCalendarMonthViewOptionsEh = set of TCalendarMonthViewOptionEh;
+
+{ TCustomCalendarMonthViewEh }
+
+  TCustomCalendarMonthViewEh = class(TCustomSpreadGridEh, ISimpleChangeNotificationEh)
+  private
+    FBackButton: TCalendarMonthPickerButtonEh;
+    FDate: TDateTime;
+    FFirstWeekDayNum: Integer;
+    FForwardButton: TCalendarMonthPickerButtonEh;
+    FMaxDate: TDateTime;
+    FMinDate: TDateTime;
+    FOptions: TCalendarMonthViewOptionsEh;
+    FStartDataRow: Integer;
+    FStartDate: TDateTime;
+
+    function AdjustDateToStartForGrid(ADateTime: TDateTime): TDateTime;
+    function GetCalendarPicker: TPlannerCalendarPickerEh;
+    function GetCell(ACol, ARow: Integer): TCalPickCellEh;
+    function GetCurrentMonth: Integer;
+    function GetEndDate: TDateTime;
+    function GetMonth: TDateTime;
+    function GetPlannerDataSource: TPlannerDataSourceEh;
+    function GetPlannerControl: TPlannerControlEh;
+
+    procedure ISimpleChangeNotificationEh.Change = PlannerDataSourceChange;
+    procedure PlannerDataSourceChange(Sender: TObject); virtual;
+    procedure PlannerDataSourceChanged;
+    procedure SetDate(const Value: TDateTime);
+    procedure SetMonth(const Value: TDateTime);
+    procedure SetOptions(const Value: TCalendarMonthViewOptionsEh);
+
+  protected
+    FCellPosUpdating: Boolean;
+
+    function CellToDate(ACol, ARow: Integer): TDateTime;
+    function CreateSpreadGridCell(ACol, ARow: Integer): TSpreadGridCellEh; override;
+    function DateToCell(ADateTime: TDateTime): TGridCoord;
+    function IsCellCelected(ACol, ARow: Integer): Boolean;
+    function IsDateCelected(ADateTime: TDateTime): Boolean;
+    function SelectCell(ACol, ARow: Longint): Boolean; override;
+
+    procedure BuildGrid;
+    procedure CellMouseDown(const Cell: TGridCoord; Button: TMouseButton; Shift: TShiftState; const ACellRect: TRect; const GridMousePos, CellMousePos: TPoint); override;
+    procedure CheckDrawCellBorder(ACol, ARow: Integer; BorderType: TGridCellBorderTypeEh; var IsDraw: Boolean; var BorderColor: TColor; var IsExtent: Boolean); override;
+    procedure CurrentCellMoved(OldCurrent: TGridCoord); override;
+    procedure DateChanged; virtual;
+    procedure DrawBottomOutBoundaryData(ARect: TRect); override;
+    procedure DrawCell(ACol, ARow: Integer; ARect: TRect; State: TGridDrawState); override;
+    procedure DrawDayCell(ACol, ARow: Integer; ARect: TRect; State: TGridDrawState); virtual;
+    procedure DrawEmptyCell(ACol, ARow: Integer; ARect: TRect; State: TGridDrawState); virtual;
+    procedure DrawLeftOutBoundaryData(ARect: TRect); override;
+    procedure DrawMonthNameRow(ACol, ARow: Integer; ARect: TRect; State: TGridDrawState); virtual;
+    procedure DrawRightOutBoundaryData(ARect: TRect); override;
+    procedure DrawTopOutBoundaryData(ARect: TRect); override;
+    procedure DrawWeekDayNamesCell(ACol, ARow: Integer; ARect: TRect; State: TGridDrawState); virtual;
+    procedure DrawWeekNum(ACol, ARow: Integer; ARect: TRect; State: TGridDrawState); virtual;
+    procedure GetColRowByDate(ADate: TDateTime; var ACol, ARow: Integer); virtual;
+    procedure KeyDown(var Key: Word; Shift: TShiftState); override;
+    procedure LayoutChanged; virtual;
+    procedure MonthChanged; virtual;
+    procedure Resize; override;
+    procedure UpdateCellPos; virtual;
+
+    property Cell[ACol, ARow: Integer]: TCalPickCellEh read GetCell;
+  public
+    constructor Create(AOwner: TComponent); override;
+    destructor Destroy; override;
+
+    function GetDateAtCell(ACol, ARow: Integer): TDateTime; virtual;
+    function SuggestedWidth: Integer; virtual;
+    function SuggestedHeight: Integer; virtual;
+
+    procedure NextMonth; virtual;
+    procedure PriorMonth; virtual;
+
+    property CalendarPicker: TPlannerCalendarPickerEh read GetCalendarPicker;
+    property Date: TDateTime read FDate write SetDate;
+    property StartDate: TDateTime read FStartDate;
+    property EndDate: TDateTime read GetEndDate;
+    property MaxDate: TDateTime read FMaxDate write FMaxDate;
+    property MinDate: TDateTime read FMinDate write FMinDate;
+    property Month: TDateTime read GetMonth write SetMonth;
+    property Options: TCalendarMonthViewOptionsEh read FOptions write SetOptions;
+    property PlannerDataSource: TPlannerDataSourceEh read GetPlannerDataSource; //;FPlannerDataSource write SetPlannerDataSource;
+    property PlannerControl: TPlannerControlEh read GetPlannerControl; //  write SetPlannerControl;
+  end;
+
+{ TCalendarMonthViewEh }
+
+  TCalendarMonthViewEh = class(TCustomCalendarMonthViewEh)
+
+  end;
+
+{ TCalendarPickerLineParamsEh }
+
+  TCalendarPickerLineParamsEh = class(TPersistent)
+  private
+    FCalendarPicker: TPlannerCalendarPickerEh;
+    FBrightColor: TColor;
+    FDarkColor: TColor;
+
+    procedure SetBrightColor(const Value: TColor);
+    procedure SetDarkColor(const Value: TColor);
+
+  public
+    constructor Create(ACalendarPicker: TPlannerCalendarPickerEh);
+    destructor Destroy; override;
+
+    function GetActualDarkColor: TColor; virtual;
+    function GetActualBrightColor: TColor; virtual;
+
+  published
+    property DarkColor: TColor read FDarkColor write SetDarkColor default clDefault;
+    property BrightColor: TColor read FBrightColor write SetBrightColor default clDefault;
+
+  end;
+
+
+{ TPlannerCalendarPickerEh }
+
+  TPlannerCalendarPickerEh = class(TCustomControl, IPlannerControlChangeReceiverEh)
+  private
+    FBorderStyle: TBorderStyle;
+    FCalsInCol: Integer;
+    FCalsInRow: Integer;
+    FCalViews: TList;
+    FDate: TDateTime;
+    FHolidaysFont: TFont;
+    FHolidaysFontStored: Boolean;
+    FLineParams: TCalendarPickerLineParamsEh;
+    FPlannerControl: TPlannerControlEh;
+    FStartMonth: TDateTime;
+
+    function GetBorderSize: Integer;
+    function GetCalViewCount: Integer;
+    function GetCalViews(Index: Integer): TCalendarMonthViewEh;
+    function GetStartMonth: TDateTime;
+    function GetStopMonth: TDateTime;
+
+    procedure IPlannerControlChangeReceiverEh.Change = PlannerDataSourceChange;
+    procedure IPlannerControlChangeReceiverEh.GetViewPeriod = GetViewPeriod;
+    {$IFDEF FPC}
+    procedure SetBorderStyle(const Value: TBorderStyle); reintroduce;
+    {$ELSE}
+    procedure SetBorderStyle(const Value: TBorderStyle);
+    {$ENDIF}
+    procedure SetDate(const Value: TDateTime);
+    procedure SetPlannerControl(const Value: TPlannerControlEh);
+    procedure SetStartMonth(const Value: TDateTime);
+    procedure PlannerDataSourceChange(Sender: TObject); virtual;
+
+    {$IFDEF FPC}
+    {$ELSE}
+    procedure CMCtl3DChanged(var Message: TMessage); message CM_CTL3DCHANGED;
+    {$ENDIF}
+    procedure CMFontChanged(var Message: TMessage); message CM_FONTCHANGED;
+
+    procedure WMEraseBkgnd(var Message: TWmEraseBkgnd); message WM_ERASEBKGND;
+
+    procedure SetHolidaysFont(const Value: TFont);
+    procedure SetHolidaysFontStored(const Value: Boolean);
+    procedure SetLineParams(const Value: TCalendarPickerLineParamsEh);
+
+  protected
+    FViewPeriodStart: TDateTime;
+    FViewPeriodFinish: TDateTime;
+
+    function CreateCalendarView: TCalendarMonthViewEh;
+
+    procedure CalViewMouseWheelDown(Sender: TObject; Shift: TShiftState; MousePos: TPoint; var Handled: Boolean); virtual;
+    procedure CalViewMouseWheelUp(Sender: TObject; Shift: TShiftState; MousePos: TPoint; var Handled: Boolean); virtual;
+    procedure CreateParams(var Params: TCreateParams); override;
+    procedure CreateWnd; override;
+    procedure EnsureDataForViewPeriod; virtual;
+    procedure GetViewPeriod(var AStartDate, AEndDate: TDateTime); virtual;
+    procedure HolidaysFontChanged(Sender: TObject); virtual;
+    procedure InvalidateControls; virtual;
+    procedure Notification(AComponent: TComponent; Operation: TOperation); override;
+    procedure Paint; override;
+    procedure PlannerDataSourceChanged; virtual;
+    procedure RefreshDefaultHolidaysFont; virtual;
+    procedure ResetCalendarViews;
+    procedure Resize; override;
+    procedure SetCalViewsCount(Count: Integer);
+    procedure SetDateInView; virtual;
+    procedure UpdateControls; virtual;
+    procedure UpdateDates;
+    procedure UpdateStartMonth; virtual;
+
+    property CalViewCount: Integer read GetCalViewCount;
+    property CalViews[Index: Integer]: TCalendarMonthViewEh read GetCalViews;
+
+  public
+    constructor Create(AOwner: TComponent); override;
+    destructor Destroy; override;
+
+    function DefaultBrightLineColor: TColor; virtual;
+    function DefaultDarkLineColor: TColor; virtual;
+    function HasFocusControl: Boolean; virtual;
+    function SuggestedWidth(CalendarViewCount: Integer): Integer; virtual;
+    function SuggestedHeight(CalendarViewCount: Integer): Integer; virtual;
+
+    procedure Scroll(MonthCount: Integer); virtual;
+    procedure NextMonth; virtual;
+    procedure PriorMonth; virtual;
+    procedure NextDay; virtual;
+    procedure PriorDay; virtual;
+    procedure NextWeek; virtual;
+    procedure PriorWeek; virtual;
+    procedure InteractiveSetDate(const Value: TDateTime); virtual;
+
+    property Date: TDateTime read FDate write SetDate;
+    property StartMonth: TDateTime read GetStartMonth write SetStartMonth;
+    property StopMonth: TDateTime read GetStopMonth;
+  published
+    property PlannerControl: TPlannerControlEh read FPlannerControl write SetPlannerControl;
+
+    property Align;
+    property Anchors;
+    property BiDiMode;
+    property BorderStyle: TBorderStyle read FBorderStyle write SetBorderStyle default bsSingle;
+    property Color;
+    property Constraints;
+    {$IFDEF FPC}
+    {$ELSE}
+    property Ctl3D default False;
+    {$ENDIF}
+    property DragCursor;
+    property DragKind;
+    property DragMode;
+    property Enabled;
+    property Font;
+    property HolidaysFont: TFont read FHolidaysFont write SetHolidaysFont;
+    property HolidaysFontStored: Boolean read FHolidaysFontStored write SetHolidaysFontStored default False;
+    property LineParams: TCalendarPickerLineParamsEh read FLineParams write SetLineParams;
+//    property FooterColor;
+    {$IFDEF FPC}
+    {$ELSE}
+    property ImeMode;
+    property ImeName;
+    {$ENDIF}
+    property ParentBiDiMode;
+    {$IFDEF FPC}
+    {$ELSE}
+    property ParentCtl3D;
+    {$ENDIF}
+    property ParentColor;
+    property ParentFont;
+    property ParentShowHint;
+    property PopupMenu;
+    property ShowHint;
+    property TabOrder;
+    property TabStop;
+{$IFDEF EH_LIB_13}
+    property Touch;
+{$ENDIF}
+    property Visible;
+
+{$IFDEF EH_LIB_5}
+    property OnContextPopup;
+{$ENDIF}
+    property OnDblClick;
+    property OnDragDrop;
+    property OnDragOver;
+    property OnEndDock;
+    property OnEndDrag;
+    property OnEnter;
+    property OnExit;
+{$IFDEF EH_LIB_13}
+    property OnGesture;
+{$ENDIF}
+    property OnKeyDown;
+    property OnKeyPress;
+    property OnKeyUp;
+    property OnMouseDown;
+    property OnMouseMove;
+    property OnMouseUp;
+    property OnStartDock;
+    property OnStartDrag;
+
+  end;
+
+implementation

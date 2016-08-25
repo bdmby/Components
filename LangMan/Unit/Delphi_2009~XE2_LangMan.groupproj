@@ -1,0 +1,72 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{C53DC23A-CA06-45CD-8667-35EBE64880D3}</ProjectGuid>
+		</PropertyGroup>
+		<ItemGroup>
+			<Projects Include="LangMan_Core.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="LangMan_VCL.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="LangMan_Uni.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="LangMan_Registrator.dproj">
+				<Dependencies/>
+			</Projects>
+		</ItemGroup>
+		<ProjectExtensions>
+			<Borland.Personality>Default.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Default.Personality/>
+			</BorlandProject>
+		</ProjectExtensions>
+		<Target Name="LangMan_Core">
+			<MSBuild Projects="LangMan_Core.dproj"/>
+		</Target>
+		<Target Name="LangMan_Core:Clean">
+			<MSBuild Targets="Clean" Projects="LangMan_Core.dproj"/>
+		</Target>
+		<Target Name="LangMan_Core:Make">
+			<MSBuild Targets="Make" Projects="LangMan_Core.dproj"/>
+		</Target>
+		<Target Name="LangMan_VCL">
+			<MSBuild Projects="LangMan_VCL.dproj"/>
+		</Target>
+		<Target Name="LangMan_VCL:Clean">
+			<MSBuild Targets="Clean" Projects="LangMan_VCL.dproj"/>
+		</Target>
+		<Target Name="LangMan_VCL:Make">
+			<MSBuild Targets="Make" Projects="LangMan_VCL.dproj"/>
+		</Target>
+		<Target Name="LangMan_Uni">
+			<MSBuild Projects="LangMan_Uni.dproj"/>
+		</Target>
+		<Target Name="LangMan_Uni:Clean">
+			<MSBuild Targets="Clean" Projects="LangMan_Uni.dproj"/>
+		</Target>
+		<Target Name="LangMan_Uni:Make">
+			<MSBuild Targets="Make" Projects="LangMan_Uni.dproj"/>
+		</Target>
+		<Target Name="LangMan_Registrator">
+			<MSBuild Projects="LangMan_Registrator.dproj"/>
+		</Target>
+		<Target Name="LangMan_Registrator:Clean">
+			<MSBuild Targets="Clean" Projects="LangMan_Registrator.dproj"/>
+		</Target>
+		<Target Name="LangMan_Registrator:Make">
+			<MSBuild Targets="Make" Projects="LangMan_Registrator.dproj"/>
+		</Target>
+		<Target Name="Build">
+			<CallTarget Targets="LangMan_Core;LangMan_VCL;LangMan_Uni;LangMan_Registrator"/>
+		</Target>
+		<Target Name="Clean">
+			<CallTarget Targets="LangMan_Core:Clean;LangMan_VCL:Clean;LangMan_Uni:Clean;LangMan_Registrator:Clean"/>
+		</Target>
+		<Target Name="Make">
+			<CallTarget Targets="LangMan_Core:Make;LangMan_VCL:Make;LangMan_Uni:Make;LangMan_Registrator:Make"/>
+		</Target>
+		<Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+	</Project>
