@@ -7,7 +7,8 @@ uses
   Dialogs, DBGridEh, MemTableDataEh, Db, ADODB, MemTableEh, StdCtrls, Mask,
   DBCtrlsEh, DBLookupEh, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls,
   XPMan,
-  DataDriverEh, ADODataDriverEh, GridsEh, EhLibMTE;
+  DataDriverEh, ADODataDriverEh, GridsEh, EhLibMTE, DynVarsEh, EhLibVCL,
+  DBAxisGridsEh;
 
 type
   TForm1 = class(TForm)

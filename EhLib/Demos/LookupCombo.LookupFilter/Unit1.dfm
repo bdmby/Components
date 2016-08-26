@@ -1,9 +1,9 @@
 object Form1: TForm1
   Left = 490
   Top = 201
-  Width = 648
-  Height = 362
   Caption = 'DBGridEh.LookupFilter '
+  ClientHeight = 324
+  ClientWidth = 632
   Color = clBtnFace
   ParentFont = True
   OldCreateOrder = False
@@ -16,21 +16,21 @@ object Form1: TForm1
   object Label1: TLabel
     Left = 32
     Top = 96
-    Width = 209
+    Width = 220
     Height = 13
     Caption = 'Lookup1 - Filtering from the start of the string'
   end
   object Label2: TLabel
     Left = 32
     Top = 192
-    Width = 209
+    Width = 219
     Height = 13
     Caption = 'Lookup2 - Filtering from any part of the string'
   end
   object Label3: TLabel
     Left = 374
     Top = 14
-    Width = 92
+    Width = 97
     Height = 13
     Caption = 'ListDataSet.Filter = '
   end
@@ -44,27 +44,27 @@ object Form1: TForm1
   object Label5: TLabel
     Left = 374
     Top = 160
-    Width = 49
+    Width = 52
     Height = 13
     Caption = 'Filtered list'
   end
   object DBLookupComboboxEh1: TDBLookupComboboxEh
     Left = 32
-    Top = 120
+    Top = 115
     Width = 265
     Height = 19
     AlwaysShowBorder = True
+    DynProps = <>
+    DataField = ''
     DropDownBox.Columns = <
       item
         FieldName = 'Company'
       end
       item
         FieldName = 'City'
-        Width = 50
       end
       item
         FieldName = 'Country'
-        Width = 50
       end>
     DropDownBox.ListSource = dsFilteredList
     DropDownBox.ListSourceAutoFilter = True
@@ -89,17 +89,17 @@ object Form1: TForm1
     Width = 265
     Height = 19
     AlwaysShowBorder = True
+    DynProps = <>
+    DataField = ''
     DropDownBox.Columns = <
       item
         FieldName = 'Company'
       end
       item
         FieldName = 'City'
-        Width = 50
       end
       item
         FieldName = 'Country'
-        Width = 50
       end>
     DropDownBox.ListSource = dsFilteredList
     DropDownBox.ListSourceAutoFilter = True
@@ -122,7 +122,7 @@ object Form1: TForm1
   object DBEditEh1: TDBEditEh
     Left = 374
     Top = 28
-    Width = 234
+    Width = 218
     Height = 21
     Anchors = [akLeft, akTop, akRight]
     DynProps = <>
@@ -133,7 +133,7 @@ object Form1: TForm1
   object DBGridEh2: TDBGridEh
     Left = 374
     Top = 72
-    Width = 234
+    Width = 218
     Height = 81
     Anchors = [akLeft, akTop, akRight]
     ColumnDefValues.AlwaysShowEditButton = True
@@ -143,22 +143,21 @@ object Form1: TForm1
     Flat = True
     GridLineParams.DataHorzLines = False
     GridLineParams.GridBoundaries = True
-    IndicatorOptions = [gioShowRowIndicatorEh]
     Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
     OptionsEh = [dghHighlightFocus, dghClearSelection, dghRowHighlight, dghDialogFind, dghColumnResize, dghColumnMove, dghHotTrack, dghExtendVertLines]
     ParentCtl3D = False
     EditButtonsShowOptions = [sebShowOnlyForCurRowEh]
     TabOrder = 3
-    TitleParams.FillStyle = cfstGradientEh
     TitleParams.BorderInFillStyle = True
+    TitleParams.FillStyle = cfstGradientEh
     object RowDetailData: TRowDetailPanelControlEh
     end
   end
   object DBGridEh1: TDBGridEh
     Left = 374
     Top = 176
-    Width = 234
-    Height = 138
+    Width = 218
+    Height = 100
     Anchors = [akLeft, akTop, akRight, akBottom]
     ColumnDefValues.AlwaysShowEditButton = True
     Ctl3D = False
@@ -167,14 +166,13 @@ object Form1: TForm1
     Flat = True
     GridLineParams.DataHorzLines = False
     GridLineParams.GridBoundaries = True
-    IndicatorOptions = [gioShowRowIndicatorEh]
     Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
     OptionsEh = [dghHighlightFocus, dghClearSelection, dghRowHighlight, dghDialogFind, dghColumnResize, dghColumnMove, dghHotTrack, dghExtendVertLines]
     ParentCtl3D = False
     EditButtonsShowOptions = [sebShowOnlyForCurRowEh]
     TabOrder = 4
-    TitleParams.FillStyle = cfstGradientEh
     TitleParams.BorderInFillStyle = True
+    TitleParams.FillStyle = cfstGradientEh
     object RowDetailData: TRowDetailPanelControlEh
     end
   end
@@ -183,6 +181,7 @@ object Form1: TForm1
     Params = <>
     Options = [mtoTextFieldsCaseInsensitive]
     SortOrder = 'Company desc'
+    Left = 32
     object MemTableData: TMemTableDataEh
       object DataStruct: TMTDataStructEh
         object CustNo: TMTNumericDataFieldEh
@@ -1064,7 +1063,8 @@ object Form1: TForm1
   end
   object dsBaseList: TDataSource
     DataSet = mteBaseList
-    Top = 32
+    Left = 48
+    Top = 56
   end
   object ADOConnection1: TADOConnection
     ConnectionString = 
