@@ -135,6 +135,25 @@ begin
   end;
 end;
 
+function MonthStrCase(Value: integer): string;
+begin
+  Result:= '<мес€ц не определЄн>';
+  case Value of
+    1: Result:= '€нваре';
+    2: Result:= 'феврале';
+    3: Result:= 'марте';
+    4: Result:= 'апреле';
+    5: Result:= 'мае';
+    6: Result:= 'июне';
+    7: Result:= 'июле';
+    8: Result:= 'августе';
+    9: Result:= 'сент€бре';
+    10: Result:= 'окт€бре';
+    11: Result:= 'но€бре';
+    12: Result:= 'декабре';
+  end;
+end;
+
 { TBRSDigitFunctions }
 constructor TBRSDigitFunctions.Create(AScript: TfsScript);
 begin
@@ -143,6 +162,7 @@ begin
   with AScript do begin
     AddMethod('function Propis(int:integer, masculine:boolean):string', CallMethod, '‘ункции SC-Retail', '„исло прописью');
     AddMethod('function MonthStr(value:integer):string', CallMethod, '‘ункции SC-Retail', 'ћес€ц прописью');
+    AddMethod('function MonthStrCase(value:integer):string', CallMethod, '‘ункции SC-Retail', 'ћес€ц прописью в склонении');
   end;
 end;
 
@@ -153,6 +173,9 @@ begin
   end else
   if (UpperCase(MethodName) = 'MONTHSTR') then begin
     Result := MonthStr(Params[0]);
+  end else
+  if (UpperCase(MethodName) = 'MONTHSTRCASE') then begin
+    Result := MonthStrCase(Params[0]);
   end;
 end;
 
